@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<sdf version="1.5">
+  <model name='aruco_visual_marker_26'>
+  <pose>0 0 0.25 0 0 0</pose>
+    <link name='marker'>
+          
+      <visual name='visual'>
+        <geometry>
+          <box>
+            <size>0.5 0.000001 0.5</size>
+          </box>
+        </geometry>
+
+        <material>
+          <script>
+            <uri>model://aruco_visual_marker_26/materials/scripts</uri>
+            <uri>model://aruco_visual_marker_26/materials/textures</uri>
+            <name>ArucoVisualMarker26/Marker</name>
+          </script>
+          <emissive>1 1 1 1</emissive>
+        </material>
+      </visual>
+
+      <collision name='collision'>
+        <geometry>
+          <box>
+            <size>0.5 0.5 0.5</size>
+          </box>
+        </geometry>
+      </collision>
+      
+    </link>
+
+    <plugin name="aruco_move" filename="libgazebo_ros_planar_move.so">
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>aruco_move</robotBaseFrame>
+    </plugin>
+
+  </model>
+</sdf>

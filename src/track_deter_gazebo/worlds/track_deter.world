@@ -1,0 +1,22 @@
+<?xml version="1.0"?> 
+<sdf version="1.4">
+  <world name="default">
+
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    
+    <include>
+      <uri>model://aruco_visual_marker_26</uri>
+    </include>
+    
+    <include>
+      <uri>model://noisy_distorted_camera_description</uri>
+    </include>
+    
+  </world>
+</sdf>
