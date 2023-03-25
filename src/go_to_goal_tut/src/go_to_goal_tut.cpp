@@ -16,6 +16,8 @@ geometry_msgs::Pose2D desired; // Desired x, y, and theta
  
 // goal_x x-value, which can be any number from 0 to 11 (inclusive)
 double goal_x = 0;
+
+bool getCurrentPoseCallback = false;
  
 // The gain K, which is used to calculate the linear velocity
 double k_l = 0;
@@ -71,6 +73,8 @@ void updatePose(const turtlesim::PoseConstPtr &currentPose) {
   current.x = currentPose->x;
   current.y = currentPose->y;
   current.theta = currentPose->theta;
+
+  getCurrentPoseCallback = true;
 }
  
 int main(int argc, char **argv) {
@@ -111,6 +115,9 @@ int main(int argc, char **argv) {
  
     // Here is where we call the callbacks that need to be called.
     ros::spinOnce();
+
+    if (!getCurrentPoseCallback) continue;
+    getCurrentPoseCallback = false;
  
     // After we call the callback function to update the robot's pose, we 
     // set the velocity values for the robot.
