@@ -6,7 +6,7 @@
 
 using namespace std;
 
-geometry_msgs::Twist velCmd2Aruco; // скорость для маркера [м/с]
+geometry_msgs::Twist velCmd2Aruco;        // скорость для маркера [м/с]
 geometry_msgs::Pose currentArucoOdomPose; // текущее положение маркера
 geometry_msgs::Pose desiredArucoOdomPose; // желаемое положение маркера
 

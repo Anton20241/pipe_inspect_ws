@@ -44,7 +44,9 @@
           <cameraName>camera</cameraName>
           <imageTopicName>image_raw</imageTopicName>
           <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-          <frameName>camera_link</frameName>
+          <odometryTopic>odom</odometryTopic>  
+          <odometryFrame>odom</odometryFrame>                   <!-- header frame id -->
+          <frameName>camera_frame</frameName>                   <!-- child  frame id -->
         </plugin>
         
       </sensor>

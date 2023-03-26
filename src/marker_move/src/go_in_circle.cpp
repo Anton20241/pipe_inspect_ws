@@ -3,17 +3,16 @@
 #include "geometry_msgs/Twist.h"
 #include "geometry_msgs/Pose.h"
 #include <gazebo_msgs/ModelStates.h>
-#include <geometry_msgs/PoseStamped.h>
 
 using namespace std;
 
-geometry_msgs::Twist velCmd2Aruco; // скорость для маркера [м/с]
+geometry_msgs::Twist velCmd2Aruco;        // скорость для маркера [м/с]
 geometry_msgs::Pose currentArucoOdomPose; // текущее положение маркера
 
 bool getCurrentArucoOdomPoseCallback = false;
 
-double velocity = 0;               // [м/c] - скорость для маркера [м/с]
-double radius_tube = 0;            // [м] - радиус кривизны оси трубы
+double velocity = 0;               // [м/c] - скорость для маркера
+double radius_tube = 0;            // [м]   - радиус кривизны оси трубы
 
 void setVelocity() {
   velCmd2Aruco.linear.x = 0.0;

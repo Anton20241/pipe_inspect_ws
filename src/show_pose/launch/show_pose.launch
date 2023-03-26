@@ -1,0 +1,5 @@
+  <launch>
+
+    <node pkg="show_pose" type="show_pose" name="show_pose" output="screen" />
+
+  </launch>

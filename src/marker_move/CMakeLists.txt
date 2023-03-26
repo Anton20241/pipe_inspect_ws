@@ -133,6 +133,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(go_to_goal src/go_to_goal.cpp)
  add_executable(go_in_circle src/go_in_circle.cpp)
+# add_executable(teleport src/teleport.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -152,6 +153,10 @@ include_directories(
  target_link_libraries(go_in_circle
    ${catkin_LIBRARIES}
  )
+
+# target_link_libraries(teleport
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(track_make)
+project(sendEstimateData)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -52,10 +52,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 # Generate messages in the 'msg' folder
-# add_message_files(
-#  FILES
-#  Poses.msg
-#)
+ add_message_files(
+   FILES
+   Poses.msg
+ )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -154,8 +154,14 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
-add_executable(track_make src/track_make.cpp)
-target_link_libraries(track_make ${catkin_LIBRARIES})
+add_executable(camera_frame_broadcaster src/camera_frame_broadcaster.cpp)
+target_link_libraries(camera_frame_broadcaster ${catkin_LIBRARIES})
+
+add_executable(aruco_posesSend src/aruco_posesSend.cpp)
+target_link_libraries(aruco_posesSend ${catkin_LIBRARIES})
+
+add_executable(aruco_posesCatch2Write src/aruco_posesCatch2Write.cpp)
+target_link_libraries(aruco_posesCatch2Write ${catkin_LIBRARIES})
 
 #############
 ## Install ##

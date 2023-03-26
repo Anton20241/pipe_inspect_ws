@@ -32,9 +32,9 @@
 
     <plugin name="aruco_move" filename="libgazebo_ros_planar_move.so">
       <commandTopic>cmd_vel</commandTopic>
-      <odometryTopic>odom1</odometryTopic>    
-      <odometryFrame>odom2</odometryFrame>          <!-- header frame id -->
-      <robotBaseFrame>aruco_move</robotBaseFrame>   <!-- child  frame id -->
+      <odometryTopic>odom</odometryTopic>    
+      <odometryFrame>odom</odometryFrame>                   <!-- header frame id -->
+      <robotBaseFrame>aruco_marker_frame</robotBaseFrame>   <!-- child  frame id -->
     </plugin>
 
   </model>

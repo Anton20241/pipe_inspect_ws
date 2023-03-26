@@ -5,15 +5,15 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <gazebo_msgs/ModelStates.h>
 #include <turtlesim/Pose.h>
-#include "track_make/Poses.h"
+// #include "track_make/Poses.h"
 #include <cstdlib>
 #include <string>
 #include <cmath>
 #include <std_msgs/Float64.h>
 
-#define MEASURE_STEP 0.01 //(м) = 1 см - шаг измерения положения маркера
+#define MEASURE_STEP 0.01 // [м] = 1 см - шаг измерения положения маркера
 
-track_make::Poses arucoPoses2Write;
+// track_make::Poses arucoPoses2Write;
 ros::Publisher arucoResDataBagPub;
 ros::Publisher cmdVelPub;
 ros::Publisher movePub;
@@ -116,8 +116,9 @@ void transformPose(const tf::TransformListener& listener){ //перевод оц
     estimateCurrentArucoOdomPose.pose.orientation.y = transform.getRotation().getY();
     estimateCurrentArucoOdomPose.pose.orientation.z = transform.getRotation().getZ();
     
-    ROS_INFO("\ncamera_frame:\tposition: (%.5f, %.5f, %.5f)\torientation: (%.5f, %.5f, %.5f, %.5f)----->\n"
-               "        odom:\tposition: (%.5f, %.5f, %.5f)\torientation: (%.5f, %.5f, %.5f, %.5f)",
+    ROS_INFO("\n"
+              "camera_frame:\tposition: (%.5f, %.5f, %.5f)\torientation: (%.5f, %.5f, %.5f, %.5f)----->\n"
+              "        odom:\tposition: (%.5f, %.5f, %.5f)\torientation: (%.5f, %.5f, %.5f, %.5f)",
       estimateCurrentArucoCameraPose.pose.position.x, 
       estimateCurrentArucoCameraPose.pose.position.y, estimateCurrentArucoCameraPose.pose.position.z,
       estimateCurrentArucoCameraPose.pose.orientation.w, estimateCurrentArucoCameraPose.pose.orientation.x,
@@ -181,17 +182,17 @@ void setVelocity() { //устанавливаем скорость черепа�
 
 void fillArucoPoses2Write(){
   //оценочное положение
-  arucoPoses2Write.estimatePose = estimateCurrentArucoOdomPose;
+  // arucoPoses2Write.estimatePose = estimateCurrentArucoOdomPose;
 
-  //фактическое положение
-  arucoPoses2Write.truePose.pose.position.x = currentArucoGazeboOdomPose.pose[1].position.x;
-  arucoPoses2Write.truePose.pose.position.y = currentArucoGazeboOdomPose.pose[1].position.y;
-  arucoPoses2Write.truePose.pose.position.z = currentArucoGazeboOdomPose.pose[1].position.z;
+  // //фактическое положение
+  // arucoPoses2Write.truePose.pose.position.x = currentArucoGazeboOdomPose.pose[1].position.x;
+  // arucoPoses2Write.truePose.pose.position.y = currentArucoGazeboOdomPose.pose[1].position.y;
+  // arucoPoses2Write.truePose.pose.position.z = currentArucoGazeboOdomPose.pose[1].position.z;
 
-  arucoPoses2Write.truePose.pose.orientation.w = currentArucoGazeboOdomPose.pose[1].orientation.w;
-  arucoPoses2Write.truePose.pose.orientation.x = currentArucoGazeboOdomPose.pose[1].orientation.x;
-  arucoPoses2Write.truePose.pose.orientation.y = currentArucoGazeboOdomPose.pose[1].orientation.y;
-  arucoPoses2Write.truePose.pose.orientation.z = currentArucoGazeboOdomPose.pose[1].orientation.z;
+  // arucoPoses2Write.truePose.pose.orientation.w = currentArucoGazeboOdomPose.pose[1].orientation.w;
+  // arucoPoses2Write.truePose.pose.orientation.x = currentArucoGazeboOdomPose.pose[1].orientation.x;
+  // arucoPoses2Write.truePose.pose.orientation.y = currentArucoGazeboOdomPose.pose[1].orientation.y;
+  // arucoPoses2Write.truePose.pose.orientation.z = currentArucoGazeboOdomPose.pose[1].orientation.z;
 }
 
 void writeArucoPoseData2Bag(){ //записываем фактическое и оценочное положение маркера
@@ -216,14 +217,14 @@ void writeArucoPoseData2Bag(){ //записываем фактическое и 
     //обновляем точку измерения положения маркера
     measure_ArucoGazeboOdomPose = estimateCurrentArucoOdomPose; 
 
-    fillArucoPoses2Write();
-    arucoResDataBagPub.publish(arucoPoses2Write);
+    // fillArucoPoses2Write();
+    // arucoResDataBagPub.publish(arucoPoses2Write);
   }
 }
 
 int main(int argc, char **argv) {
   
-  ros::init(argc, argv, "follow_aruco");
+  ros::init(argc, argv, "aruco_listener");
 
   ros::NodeHandle node;
   tf::TransformListener listener;
@@ -240,8 +241,8 @@ int main(int argc, char **argv) {
   ros::Subscriber turtlePoseSub =
     node.subscribe("/turtle1/pose", 100, getCurrentTurtlePose);
 
-  arucoResDataBagPub =
-    node.advertise<track_make::Poses>("arucoResDataBagTopic", 100);
+  // arucoResDataBagPub =
+  //   node.advertise<track_make::Poses>("arucoResDataBagTopic", 100);
 
   cmdVelPub =
     node.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 100);
