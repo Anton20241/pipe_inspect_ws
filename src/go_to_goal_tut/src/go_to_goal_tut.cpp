@@ -76,7 +76,8 @@ void updatePose(const turtlesim::PoseConstPtr &currentPose) {
 
   getCurrentPoseCallback = true;
 }
- 
+
+
 int main(int argc, char **argv) {
  
   // Initiate ROS
