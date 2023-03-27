@@ -6,17 +6,17 @@ rosbag::Bag arucoResData;
 
 void arucoPosesCatchAndWrite(const sendEstimateData::Poses& posesMsg){
   
-  ROS_INFO_STREAM("!!!--ArucoPosesCatch2Write catched new msg from arucoResDataBagTopic--!!!\n");
+  ROS_INFO_STREAM("!!!--arucoPosesCatch2Write catched new msg from arucoResDataBagTopic--!!!\n");
   arucoResData.write("arucoResDataBagTopic", ros::Time::now(), posesMsg);
-  ROS_INFO("ArucoPosesCatch2Write writed the next data to ArucoPosesCatch2Write.bag:\n"
+  ROS_INFO("arucoPosesCatch2Write writed the next data to arucoPosesCatch2Write.bag:\n"
             "---------------------------------------------------- \n"
-            "posesMsg.estimatePose.pose.position.x = %.5f \n"
-            "posesMsg.estimatePose.pose.position.y = %.5f \n"
-            "posesMsg.estimatePose.pose.position.z = %.5f \n"
+            "estimatePose.pose.position.x = %.5f \n"
+            "estimatePose.pose.position.y = %.5f \n"
+            "estimatePose.pose.position.z = %.5f \n"
             "---------------------------------------------------- \n"
-            "posesMsg.truePose.pose.position.x = %.5f \n"
-            "posesMsg.truePose.pose.position.y = %.5f \n"
-            "posesMsg.truePose.pose.position.z = %.5f \n"
+            "truePose.pose.position.x = %.5f \n"
+            "truePose.pose.position.y = %.5f \n"
+            "truePose.pose.position.z = %.5f \n"
             "---------------------------------------------------- \n",
             posesMsg.estimatePose.pose.position.x,
             posesMsg.estimatePose.pose.position.y,
@@ -29,10 +29,10 @@ void arucoPosesCatchAndWrite(const sendEstimateData::Poses& posesMsg){
 
 int main(int argc, char **argv) {
   ros::init(argc, argv, "arucoPosesCatch2Write");
-  ROS_INFO_STREAM("!!!--ArucoPosesCatch2Write is ready--!!!");
+  ROS_INFO_STREAM("!!!--arucoPosesCatch2Write is ready--!!!");
   ros::NodeHandle n;
-  arucoResData.open("ArucoPosesCatch2Write.bag", rosbag::bagmode::Write);
-  ros::Subscriber sub = n.subscribe("arucoResDataBagTopic", 100, arucoPosesCatchAndWrite);
+  arucoResData.open("arucoPosesCatch2Write.bag", rosbag::bagmode::Write);
+  ros::Subscriber sub = n.subscribe("arucoResDataBagTopic", 0, arucoPosesCatchAndWrite);
   ros::spin();
   arucoResData.close();
   return 0;

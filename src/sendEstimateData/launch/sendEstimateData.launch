@@ -2,6 +2,9 @@
 <launch>
 
 <!--camera_frame_broadcaster-->
+    <!-- <node pkg="sendEstimateData" type="aruco_posesCatch2Write" name="aruco_posesCatch2Write" /> -->
+
+<!--camera_frame_broadcaster-->
     <node pkg="sendEstimateData" type="camera_frame_broadcaster" name="camera_frame_broadcaster" />
 
 <!--aruco_listener-->

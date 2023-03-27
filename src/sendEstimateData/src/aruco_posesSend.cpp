@@ -11,8 +11,9 @@
 
 #define MEASURE_STEP 0.01                                         // [м] = 1 см - шаг измерения положения маркера
 
-//сообщение в топик на запись данных
+// сообщение в топик на запись данных
 sendEstimateData::Poses arucoPoses2Write;
+// паблишер в топик на запись данных
 ros::Publisher arucoResDataBagPub;
 
 geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее оценочное положение маркера относительно камеры
@@ -95,8 +96,8 @@ double getDistance(const double t1, const double t2) {
 }
 
 void setArucoPoses2Write(){
-  arucoPoses2Write.estimatePose = estimateCurrentArucoCameraPose;        // текущее оценочное положение маркера относительно камеры
-  arucoPoses2Write.truePose     = currentArucoCameraPose;                // текущее фактическое положение маркера относительно камеры
+  arucoPoses2Write.estimatePose = estimateCurrentArucoCameraPose;  // текущее оценочное   положение маркера относительно камеры
+  arucoPoses2Write.truePose     = currentArucoCameraPose;          // текущее фактическое положение маркера относительно камеры
 }
 
 // записываем фактическое и оценочное положение маркера
@@ -104,7 +105,7 @@ void writeArucoPoseData2Bag(){
 
   if (currentArucoCameraPose == prevArucoCameraPose) return;
 
-  geometry_msgs::Vector3 markerOffset;
+  geometry_msgs::Vector3 markerOffset; // фактическое смещение маркера
   
   // фактическое перемещение маркера
   markerOffset.x = abs(getDistance(currentArucoCameraPose.pose.position.x, prevArucoCameraPose.pose.position.x));
@@ -118,7 +119,7 @@ void writeArucoPoseData2Bag(){
     arucoResDataBagPub.publish(arucoPoses2Write);
     ROS_INFO("\n"
               "######################################################\n"
-              "markerSpaceOffset = %.5f \n"
+              "[markerSpaceOffset = %.5f] \n"
               "!!! SEND POSES DATA !!!\n"
               "estimateCurrentArucoCameraPose.pose.position.x = %.5f \n"
               "estimateCurrentArucoCameraPose.pose.position.y = %.5f \n"
