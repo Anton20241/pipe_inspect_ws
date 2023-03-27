@@ -104,3 +104,6 @@ int main(int argc, char **argv) {
 
   return 0;
 }
+
+
+// rostopic pub -r 20 /gazebo/set_model_state gazebo_msgs/ModelState '{model_name: aruco_visual_marker_26, pose: { position: { x: 0, y: 0, z: 0 }, orientation: {x: 0, y: 0, z: 0, w: 1 } }, twist: { linear: { x: 0, y: 0, z: 0 }, angular: { x: 0, y: 0, z: 0} }, reference_frame: world }'

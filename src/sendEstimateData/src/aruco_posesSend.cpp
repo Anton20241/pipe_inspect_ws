@@ -9,7 +9,7 @@
 #include <cmath>
 #include <std_msgs/Float64.h>
 
-#define MEASURE_STEP 0.01                                         // [м] = 1 см - шаг измерения положения маркера
+#define MEASURE_STEP 0.1                                          // [м] = 10 см - шаг измерения положения маркера
 
 // сообщение в топик на запись данных
 sendEstimateData::Poses arucoPoses2Write;
@@ -112,9 +112,9 @@ void writeArucoPoseData2Bag(){
   markerOffset.y = abs(getDistance(currentArucoCameraPose.pose.position.y, prevArucoCameraPose.pose.position.y));
   markerOffset.z = abs(getDistance(currentArucoCameraPose.pose.position.z, prevArucoCameraPose.pose.position.z));
   double markerSpaceOffset = std::sqrt(std::pow(markerOffset.x, 2) + std::pow(markerOffset.y, 2) + std::pow(markerOffset.z, 2));
-  prevArucoCameraPose = currentArucoCameraPose;
   
   if (markerSpaceOffset > MEASURE_STEP) {
+    prevArucoCameraPose = currentArucoCameraPose;
     setArucoPoses2Write();
     arucoResDataBagPub.publish(arucoPoses2Write);
     ROS_INFO("\n"

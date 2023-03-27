@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <launch>
 
-    <arg name="velocity" default="0.055555"/>
+    <arg name="velocity" default="0.056"/>
     <arg name="radius_tube"    default="250"/>
     
     <node pkg="marker_move" type="go_in_circle" name="go_in_circle" output="screen">

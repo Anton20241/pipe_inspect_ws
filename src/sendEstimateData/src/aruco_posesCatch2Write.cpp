@@ -6,7 +6,7 @@ rosbag::Bag arucoResData;
 
 void arucoPosesCatchAndWrite(const sendEstimateData::Poses& posesMsg){
   
-  ROS_INFO_STREAM("!!!--arucoPosesCatch2Write catched new msg from arucoResDataBagTopic--!!!\n");
+  ROS_INFO_STREAM("!!!--arucoPosesCatch2Write catched new msg from arucoResDataBagTopic--!!!");
   arucoResData.write("arucoResDataBagTopic", ros::Time::now(), posesMsg);
   ROS_INFO("arucoPosesCatch2Write writed the next data to arucoPosesCatch2Write.bag:\n"
             "---------------------------------------------------- \n"

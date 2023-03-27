@@ -53,3 +53,26 @@
     </link>
   </model>
 </sdf>
+
+
+<!-- Cheader: 
+  seq: 471
+  stamp: 
+    secs: 534
+    nsecs: 310000000
+  frame_id: "camera_frame"
+height: 1080
+width: 1920
+distortion_model: "plumb_bob"
+D: [0.0, 0.0, 0.0, 0.0, 0.0]
+K: [1663.1481384679323, 0.0, 960.5, 0.0, 1663.1481384679323, 540.5, 0.0, 0.0, 1.0]
+R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+P: [1663.1481384679323, 0.0, 960.5, -0.0, 0.0, 1663.1481384679323, 540.5, 0.0, 0.0, 0.0, 1.0, 0.0]
+binning_x: 0
+binning_y: 0
+roi: 
+  x_offset: 0
+  y_offset: 0
+  height: 0
+  width: 0
+  do_rectify: False -->
