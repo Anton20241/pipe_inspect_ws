@@ -9,7 +9,7 @@
 #include <cmath>
 #include <std_msgs/Float64.h>
 
-#define MEASURE_STEP 0.1                                          // [м] = 10 см - шаг измерения положения маркера
+#define MEASURE_STEP 0.05                                          // [м] = 5 см - шаг измерения положения маркера
 
 // сообщение в топик на запись данных
 sendEstimateData::Poses arucoPoses2Write;
@@ -100,10 +100,18 @@ void setArucoPoses2Write(){
   arucoPoses2Write.truePose     = currentArucoCameraPose;          // текущее фактическое положение маркера относительно камеры
 }
 
+bool factEqualEstimate(){
+  if (estimateCurrentArucoCameraPose.pose.position.x == currentArucoCameraPose.pose.position.x) return true;
+  if (estimateCurrentArucoCameraPose.pose.position.y == currentArucoCameraPose.pose.position.z) return true;
+  if (estimateCurrentArucoCameraPose.pose.position.z == currentArucoCameraPose.pose.position.z) return true;
+  return false;
+}
+
 // записываем фактическое и оценочное положение маркера
 void writeArucoPoseData2Bag(){                                        
 
   if (currentArucoCameraPose == prevArucoCameraPose) return;
+  if (factEqualEstimate()) return; 
 
   geometry_msgs::Vector3 markerOffset; // фактическое смещение маркера
   
