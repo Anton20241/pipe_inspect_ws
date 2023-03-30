@@ -34,7 +34,7 @@
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>    
       <odometryFrame>odom</odometryFrame>                   <!-- header frame id -->
-      <robotBaseFrame>aruco_marker_frame</robotBaseFrame>   <!-- child  frame id -->
+      <robotBaseFrame>aruco_frame</robotBaseFrame>          <!-- child  frame id -->
     </plugin>
 
   </model>

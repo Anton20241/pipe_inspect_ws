@@ -18,6 +18,8 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
 )
 
+find_package(OpenCV REQUIRED )
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -154,9 +156,12 @@ include_directories(
 #   ${catkin_LIBRARIES}
 # )
 
+add_executable(camera_frame_broadcaster_tm src/camera_frame_broadcaster.cpp)
+target_link_libraries(camera_frame_broadcaster_tm ${catkin_LIBRARIES})
+
 add_executable(track_make src/track_make.cpp)
 target_link_libraries(track_make ${catkin_LIBRARIES})
-
+target_link_libraries(track_make ${OpenCV_LIBS})
 #############
 ## Install ##
 #############

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <launch>
 
-<!--turtlesim_node-->
-    <node pkg="turtlesim" type="turtlesim_node" name="turtlesim_node"/>
+<!--camera_frame_broadcaster-->
+    <node pkg="track_make" type="camera_frame_broadcaster_tm" name="camera_frame_broadcaster_tm" />
+    <param name="/use_sim_time" value="true"/>
 
-<!--track_make-->
+<!-- track_make -->
     <node pkg="track_make" type="track_make"    name="track_make" output="screen" />
+    <param name="/use_sim_time" value="true"/>
 
-  </launch> 
+</launch>

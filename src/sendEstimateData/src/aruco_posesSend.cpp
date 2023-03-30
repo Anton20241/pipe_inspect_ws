@@ -2,7 +2,6 @@
 #include <tf/transform_listener.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <gazebo_msgs/ModelStates.h>
-#include <turtlesim/Pose.h>
 #include "sendEstimateData/Poses.h"
 #include <cstdlib>
 #include <string>
@@ -25,16 +24,6 @@ geometry_msgs::PoseStamped prevArucoCameraPose;                   // преды�
 bool allCallbacksCall = false;                                    // все колбеки вызваны
 bool getEstimateCurrentArucoCameraPoseCallback = false;
 bool getCurrentArucoOdomPoseCallback = false;
-
-void setup() {
-  estimateCurrentArucoCameraPose.pose.position.x = 0.0;
-  estimateCurrentArucoCameraPose.pose.position.y = 0.0;
-  estimateCurrentArucoCameraPose.pose.position.z = 0.0;
-  estimateCurrentArucoCameraPose.pose.orientation.w = 0.0;
-  estimateCurrentArucoCameraPose.pose.orientation.x = 0.0;
-  estimateCurrentArucoCameraPose.pose.orientation.y = 0.0;
-  estimateCurrentArucoCameraPose.pose.orientation.z = 0.0;
-}
 
 // получаем текущее оценочное положение маркера относительно камеры
 void getEstimateCurrentArucoCameraPose(const geometry_msgs::PoseStamped& arucoCameraMsg) { 
@@ -60,7 +49,7 @@ void getCurrentArucoOdomPose(const gazebo_msgs::ModelStates& arucoGazeboMsg) {
 void transformPose(const tf::TransformListener& listener){
   tf::StampedTransform transform;
   try{
-    listener.lookupTransform("camera_frame", "aruco_marker_frame", ros::Time(0), transform);
+    listener.lookupTransform("camera_frame", "aruco_frame", ros::Time(0), transform);
     
     currentArucoCameraPose.header.frame_id = "camera_frame";
     currentArucoCameraPose.pose.position.x = transform.getOrigin().x();
@@ -157,8 +146,6 @@ int main(int argc, char **argv) {
 
   ros::NodeHandle node;
   tf::TransformListener listener;
-
-  setup();
 
   ros::Subscriber arucoCameraPoseSub =
     node.subscribe("/aruco_single/pose", 0, getEstimateCurrentArucoCameraPose);
