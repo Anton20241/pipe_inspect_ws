@@ -18,5 +18,9 @@
       <uri>model://noisy_distorted_camera_description</uri>
     </include>
     
+    <include>
+      <uri>model://turtlebot3_simulations/turtlebot3_gazebo/models/turtlebot3_waffle_pi</uri>
+    </include>
+    
   </world>
 </sdf>
