@@ -113,7 +113,7 @@ int main(int argc, char **argv) {
     node.subscribe("/gazebo/model_states", 0, getCurrentArucoOdomPose);
  
   ros::Publisher velCmd2ArucoPub =
-    node.advertise<geometry_msgs::Twist>("/cmd_vel", 0);
+    node.advertise<geometry_msgs::Twist>("/aruco_cmd_vel", 0);
 
   ros::Rate loop_rate(100); 
     
