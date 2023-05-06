@@ -1,10 +1,10 @@
 #include <ros/ros.h>
 #include <rosbag/bag.h>
-#include "sendEstimateData/Poses.h"
+#include "send_estimate_data/Poses.h"
 
 rosbag::Bag arucoResData;
 
-void arucoPosesCatchAndWrite(const sendEstimateData::Poses& posesMsg){
+void arucoPosesCatchAndWrite(const send_estimate_data::Poses& posesMsg){
   
   ROS_INFO_STREAM("!!!--arucoPosesCatch2Write catched new msg from arucoResDataBagTopic--!!!");
   arucoResData.write("arucoResDataBagTopic", ros::Time::now(), posesMsg);

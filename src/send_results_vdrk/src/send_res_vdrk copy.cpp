@@ -2,7 +2,7 @@
 #include <tf/transform_listener.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <gazebo_msgs/ModelStates.h>
-#include "send_estimate_data/Poses.h"
+#include "send_results_vdrk/Poses4.h"
 #include <cstdlib>
 #include <string>
 #include <cmath>
@@ -11,16 +11,18 @@
 #define MEASURE_STEP 0.05                                          // [м] = 5 см - шаг измерения положения маркера
 
 // сообщение в топик на запись данных
-send_estimate_data::Poses arucoPoses2Write;
+send_results_vdrk::Poses4 res2Write;
 // паблишер в топик на запись данных
 ros::Publisher arucoResDataBagPub;
 
-geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее оценочное положение маркера относительно камеры
-
-geometry_msgs::Pose currentArucoOdomPose;                         // текущее фактическое положение маркера относительно ГСК
-geometry_msgs::PoseStamped currentArucoCameraPose;                // текущее фактическое положение маркера относительно камеры
+geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее      оценочное положение маркера относительно камеры
+geometry_msgs::PoseStamped currentArucoCameraPose;                // текущее    фактическое положение маркера относительно камеры
 geometry_msgs::PoseStamped prevArucoCameraPose;                   // предыдущее фактическое положение маркера относительно камеры
 
+geometry_msgs::PoseStamped currentArucoOdomPose;                  // текущее фактическое положение маркера относительно ГСК
+geometry_msgs::PoseStamped estimateCurrentArucoOdomPose;          // текущее   оценочное положение маркера относительно ГСК
+
+bool init = false;
 bool allCallbacksCall = false;                                    // все колбеки вызваны
 bool getEstimateCurrentArucoCameraPoseCallback = false;
 bool getCurrentArucoOdomPoseCallback = false;
@@ -33,14 +35,14 @@ void getEstimateCurrentArucoCameraPose(const geometry_msgs::PoseStamped& arucoCa
 
 // получаем текущее фактическое положение маркера относительно ГСК
 void getCurrentArucoOdomPose(const gazebo_msgs::ModelStates& arucoGazeboMsg) {
-  currentArucoOdomPose.position.x = arucoGazeboMsg.pose[1].position.x;
-  currentArucoOdomPose.position.y = arucoGazeboMsg.pose[1].position.y;
-  currentArucoOdomPose.position.z = arucoGazeboMsg.pose[1].position.z;
+  currentArucoOdomPose.pose.position.x = arucoGazeboMsg.pose[1].position.x;
+  currentArucoOdomPose.pose.position.y = arucoGazeboMsg.pose[1].position.y;
+  currentArucoOdomPose.pose.position.z = arucoGazeboMsg.pose[1].position.z;
 
-  currentArucoOdomPose.orientation.w = arucoGazeboMsg.pose[1].orientation.w;
-  currentArucoOdomPose.orientation.x = arucoGazeboMsg.pose[1].orientation.x;
-  currentArucoOdomPose.orientation.y = arucoGazeboMsg.pose[1].orientation.y;
-  currentArucoOdomPose.orientation.z = arucoGazeboMsg.pose[1].orientation.z;
+  currentArucoOdomPose.pose.orientation.w = arucoGazeboMsg.pose[1].orientation.w;
+  currentArucoOdomPose.pose.orientation.x = arucoGazeboMsg.pose[1].orientation.x;
+  currentArucoOdomPose.pose.orientation.y = arucoGazeboMsg.pose[1].orientation.y;
+  currentArucoOdomPose.pose.orientation.z = arucoGazeboMsg.pose[1].orientation.z;
 
   getCurrentArucoOdomPoseCallback = true;
 }
@@ -49,29 +51,33 @@ void getCurrentArucoOdomPose(const gazebo_msgs::ModelStates& arucoGazeboMsg) {
 void getCurrentArucoCameraPose(const tf::TransformListener& listener){
   tf::StampedTransform transform;
   try{
-    listener.lookupTransform("camera_frame", "aruco_frame", ros::Time(0), transform);
+    currentArucoOdomPose.header.frame_id = "odom";
+
+    listener.transformPose("camera_frame", currentArucoOdomPose, currentArucoCameraPose);
     
-    currentArucoCameraPose.header.frame_id = "camera_frame";
-    currentArucoCameraPose.pose.position.x = transform.getOrigin().x();
-    currentArucoCameraPose.pose.position.y = transform.getOrigin().y();
-    currentArucoCameraPose.pose.position.z = transform.getOrigin().z();
-    currentArucoCameraPose.pose.orientation.w = transform.getRotation().getW();
-    currentArucoCameraPose.pose.orientation.x = transform.getRotation().getX();
-    currentArucoCameraPose.pose.orientation.y = transform.getRotation().getY();
-    currentArucoCameraPose.pose.orientation.z = transform.getRotation().getZ();
-    // std::cout << std::endl;
-    // ROS_INFO("\n"
-    //           "<--------------odom:\tposition: (%.5f, %.5f, %.5f)\torientation: (%.5f, %.5f, %.5f, %.5f)----->\n"
-    //           "<------camera_frame:\tposition: (%.5f, %.5f, %.5f)\torientation: (%.5f, %.5f, %.5f, %.5f)----->",
-    //   currentArucoOdomPose.position.x, 
-    //   currentArucoOdomPose.position.y,    currentArucoOdomPose.position.z,
-    //   currentArucoOdomPose.orientation.w, currentArucoOdomPose.orientation.x,
-    //   currentArucoOdomPose.orientation.y, currentArucoOdomPose.orientation.z,
+    // listener.lookupTransform("aruco_frame", "camera_frame", ros::Time(0), transform);
+    // currentArucoCameraPose.header.frame_id = "aruco_frame";
+    // currentArucoCameraPose.pose.position.x = transform.getOrigin().x();
+    // currentArucoCameraPose.pose.position.y = transform.getOrigin().y();
+    // currentArucoCameraPose.pose.position.z = transform.getOrigin().z();
+    // currentArucoCameraPose.pose.orientation.w = transform.getRotation().getW();
+    // currentArucoCameraPose.pose.orientation.x = transform.getRotation().getX();
+    // currentArucoCameraPose.pose.orientation.y = transform.getRotation().getY();
+    // currentArucoCameraPose.pose.orientation.z = transform.getRotation().getZ();
+
+    std::cout << std::endl;
+    ROS_INFO("\n"
+              "<--------------odom:\tposition: (%.5f, %.5f, %.5f)\torientation: (%.5f, %.5f, %.5f, %.5f)----->\n"
+              "<------camera_frame:\tposition: (%.5f, %.5f, %.5f)\torientation: (%.5f, %.5f, %.5f, %.5f)----->",
+      currentArucoOdomPose.pose.position.x, 
+      currentArucoOdomPose.pose.position.y,    currentArucoOdomPose.pose.position.z,
+      currentArucoOdomPose.pose.orientation.w, currentArucoOdomPose.pose.orientation.x,
+      currentArucoOdomPose.pose.orientation.y, currentArucoOdomPose.pose.orientation.z,
       
-    //   currentArucoCameraPose.pose.position.x, 
-    //   currentArucoCameraPose.pose.position.y,    currentArucoCameraPose.pose.position.z,
-    //   currentArucoCameraPose.pose.orientation.w, currentArucoCameraPose.pose.orientation.x,
-    //   currentArucoCameraPose.pose.orientation.y, currentArucoCameraPose.pose.orientation.z);
+      currentArucoCameraPose.pose.position.x, 
+      currentArucoCameraPose.pose.position.y,    currentArucoCameraPose.pose.position.z,
+      currentArucoCameraPose.pose.orientation.w, currentArucoCameraPose.pose.orientation.x,
+      currentArucoCameraPose.pose.orientation.y, currentArucoCameraPose.pose.orientation.z);
   }
   catch (tf::TransformException &ex) {
     ROS_ERROR("%s",ex.what());
@@ -79,14 +85,22 @@ void getCurrentArucoCameraPose(const tf::TransformListener& listener){
   }
 }
 
+// получаем текущее оценочное положение маркера относительно ГСК
+void getEstimeteCurrentArucoCameraPose(){
+  if (init) estimateCurrentArucoOdomPose = currentArucoOdomPose;
+  init = false;
+}
+
 // расстояние между точками
 double getDistance(const double t1, const double t2) {                
   return t1 - t2;
 }
 
-void setArucoPoses2Write(){
-  arucoPoses2Write.estimatePose = estimateCurrentArucoCameraPose;  // текущее оценочное   положение маркера относительно камеры
-  arucoPoses2Write.truePose     = currentArucoCameraPose;          // текущее фактическое положение маркера относительно камеры
+void setres2Write(){
+  res2Write.estimateArCamPose   = estimateCurrentArucoCameraPose;     // текущее оценочное   положение маркера относительно камеры
+  res2Write.trueArCamPose       = currentArucoCameraPose;             // текущее фактическое положение маркера относительно камеры
+  res2Write.estimateArOdomPose  = estimateCurrentArucoOdomPose;       // текущее   оценочное положение маркера относительно ГСК
+  res2Write.trueArOdomPose      = currentArucoOdomPose;               // текущее фактическое положение маркера относительно ГСК
 }
 
 bool factEqualEstimate(){
@@ -96,7 +110,7 @@ bool factEqualEstimate(){
   return false;
 }
 
-// записываем фактическое и оценочное положение маркера
+// записываем результаты эксперимента
 void writeArucoPoseData2Bag(){                                        
 
   if (currentArucoCameraPose == prevArucoCameraPose) return;
@@ -112,8 +126,8 @@ void writeArucoPoseData2Bag(){
   
   if (markerSpaceOffset > MEASURE_STEP) {
     prevArucoCameraPose = currentArucoCameraPose;
-    setArucoPoses2Write();
-    arucoResDataBagPub.publish(arucoPoses2Write);
+    setres2Write();
+    arucoResDataBagPub.publish(res2Write);
     ROS_INFO("\n"
               "######################################################\n"
               "[markerSpaceOffset = %.5f] \n"
@@ -147,14 +161,14 @@ int main(int argc, char **argv) {
   ros::NodeHandle node;
   tf::TransformListener listener;
 
-  ros::Subscriber arucoCameraPoseSub =
+  ros::Subscriber arucoCameraPoseSub =                                             // текущее оценочное положение маркера относительно камеры
     node.subscribe("/aruco_single/pose", 0, getEstimateCurrentArucoCameraPose);
 
-  ros::Subscriber arucoGazeboPoseSub =
+  ros::Subscriber arucoGazeboPoseSub =                                             // текущее фактическое положение маркера относительно ГСК
     node.subscribe("/gazebo/model_states", 0, getCurrentArucoOdomPose);
 
   arucoResDataBagPub =
-    node.advertise<send_estimate_data::Poses>("arucoResDataBagTopic", 0);
+    node.advertise<send_results_vdrk::Poses4>("arucoResDataBagTopic", 0);
 
   ros::Rate loop_rate(30);
 
@@ -169,7 +183,9 @@ int main(int argc, char **argv) {
     getEstimateCurrentArucoCameraPoseCallback = false;
     getCurrentArucoOdomPoseCallback           = false;
 
-    getCurrentArucoCameraPose(listener);
+    getCurrentArucoCameraPose(listener);                                           // текущее фактическое положение маркера относительно камеры
+    getEstimeteCurrentArucoCameraPose();                                           // текущее   оценочное положение маркера относительно ГСК
+    
     writeArucoPoseData2Bag();
 
     loop_rate.sleep();

@@ -15,7 +15,7 @@
     </include>
     
     <include>
-      <uri>model://noisy_distorted_camera_description</uri>
+      <uri>model://camera</uri>
     </include>
     
   </world>

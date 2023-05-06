@@ -13,11 +13,11 @@
 #define MIN_ROBOTS_DIST 2                                         // минимальное  расстояние между turtle_front & turtle_back
 #define MAX_ROBOTS_DIST 8                                         // максимальное расстояние между turtle_front & turtle_back
 
-geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее  положение маркера относительно камеры
+geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее оц. положение маркера относительно камеры
 geometry_msgs::PoseStamped desiredArucoCameraPose;                // желаемое положение маркера относительно камеры
 
-// geometry_msgs::PoseStamped currentTurtleFrontOdomPose;            // текущее  положение turtle_front относительно ГСК
-// geometry_msgs::PoseStamped desiredTurtleFrontOdomPose;            // желаемое положение turtle_front относительно ГСК
+// geometry_msgs::PoseStamped currentTurtleFrontOdomPose;         // текущее  положение turtle_front относительно ГСК
+// geometry_msgs::PoseStamped desiredTurtleFrontOdomPose;         // желаемое положение turtle_front относительно ГСК
 
 geometry_msgs::Twist velCmd2Turtle;                               // скорость для роботов [м/с]
 ros::Publisher velCmd2TurtleBack;                                 // скорость для заднего робота
@@ -36,8 +36,10 @@ enum TurtleType{
 double velocity = 0;
 double move_precision = 0;
 
-bool turtle_back_stop = true;
-bool turtle_front_stop = true;
+bool turtle_back_stop     = true;
+bool turtle_front_stop    = true;
+bool turtle_front_start   = true;
+bool turtle_back_start    = false;
 
 bool allCallbacksCall = false;                                    // все колбеки вызваны
 bool getEstimateCurrentArucoCameraPoseCallback = false;
@@ -93,9 +95,6 @@ void setTurtleVelocity(size_t type) {
 
   if (type == TURTLE_FRONT) {
 
-    desiredArucoCameraPose = estimateCurrentArucoCameraPose;
-    desiredArucoCameraPose.pose.position.z = estimateCurrentArucoCameraPose.pose.position.z + MAX_ROBOTS_DIST;
-
     distanceToGoal_x = ( 1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.x, estimateCurrentArucoCameraPose.pose.position.x);
     distanceToGoal_y = ( 1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.z, estimateCurrentArucoCameraPose.pose.position.z);
     distanceToGoal_z = (-1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.y, estimateCurrentArucoCameraPose.pose.position.y);
@@ -103,11 +102,8 @@ void setTurtleVelocity(size_t type) {
 
   if (type == TURTLE_BACK) {
 
-    desiredArucoCameraPose = estimateCurrentArucoCameraPose;
-    desiredArucoCameraPose.pose.position.z = estimateCurrentArucoCameraPose.pose.position.z - MIN_ROBOTS_DIST;
-
-    distanceToGoal_x = (-1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.z, estimateCurrentArucoCameraPose.pose.position.z);
-    distanceToGoal_y = (-1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.x, estimateCurrentArucoCameraPose.pose.position.x);
+    distanceToGoal_x = (-1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.x, estimateCurrentArucoCameraPose.pose.position.x);
+    distanceToGoal_y = (-1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.z, estimateCurrentArucoCameraPose.pose.position.z);
     distanceToGoal_z = ( 1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.y, estimateCurrentArucoCameraPose.pose.position.y);
   }
 
@@ -154,28 +150,41 @@ void setTurtleVelocity(size_t type) {
   }
 }
 
-
 void go_turtle_front(){
 
-  if (distance_between_robots < MAX_ROBOTS_DIST && turtle_back_stop) {
+  if (distance_between_robots < (MAX_ROBOTS_DIST - move_precision) && turtle_back_stop) {
+    if (turtle_front_start){
+      std::cout << "turtle_front_start\n";
+      desiredArucoCameraPose = estimateCurrentArucoCameraPose;
+      desiredArucoCameraPose.pose.position.z = MAX_ROBOTS_DIST;
+      turtle_front_start = false;
+    }
     setTurtleVelocity(TURTLE_FRONT);
     velCmd2TurtleFront.publish(velCmd2Turtle);
     turtle_front_stop = false;
   } else {
     stop_turtle(TURTLE_FRONT);
   }
+  if (turtle_back_stop && turtle_front_stop) turtle_back_start = true;
 
 }
 
 void go_turtle_back(){
 
-  if (distance_between_robots > MIN_ROBOTS_DIST && turtle_front_stop) {
+  if (distance_between_robots > (MIN_ROBOTS_DIST + move_precision) && turtle_front_stop) {
+    if (turtle_back_start){
+      std::cout << "turtle_back_start\n";
+      desiredArucoCameraPose = estimateCurrentArucoCameraPose;
+      desiredArucoCameraPose.pose.position.z = MIN_ROBOTS_DIST;
+      turtle_back_start = false;
+    }
     setTurtleVelocity(TURTLE_BACK);
     velCmd2TurtleBack.publish(velCmd2Turtle);
     turtle_back_stop = false;
   } else {
     stop_turtle(TURTLE_BACK);
   }
+  if (turtle_back_stop && turtle_front_stop) turtle_front_start = true;
 
 }
 
@@ -225,7 +234,7 @@ int main(int argc, char **argv) {
 
   setup();
 
-  // ros::Subscriber currentTurtleFrontOdomPoseSub =                                               // тек позиция переднего робота
+  // ros::Subscriber currentTurtleFrontOdomPoseSub =                                            // тек позиция переднего робота
   //   node.subscribe("/gazebo/model_states", 0, getCurrentTurtleFrontOdomPose);
 
   ros::Subscriber arucoCameraPoseSub =

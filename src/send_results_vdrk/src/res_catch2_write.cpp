@@ -1,10 +1,10 @@
 #include <ros/ros.h>
 #include <rosbag/bag.h>
-#include "sendEstimateData/Poses.h"
+#include "send_results_vdrk/Poses4.h"
 
 rosbag::Bag arucoResData;
 
-void arucoPosesCatchAndWrite(const sendEstimateData::Poses& posesMsg){
+void arucoPosesCatchAndWrite(const send_results_vdrk::Poses4& posesMsg){
   
   ROS_INFO_STREAM("!!!--arucoPosesCatch2Write catched new msg from arucoResDataBagTopic--!!!");
   arucoResData.write("arucoResDataBagTopic", ros::Time::now(), posesMsg);
@@ -18,13 +18,13 @@ void arucoPosesCatchAndWrite(const sendEstimateData::Poses& posesMsg){
             "truePose.pose.position.y = %.5f \n"
             "truePose.pose.position.z = %.5f \n"
             "---------------------------------------------------- \n",
-            posesMsg.estimatePose.pose.position.x,
-            posesMsg.estimatePose.pose.position.y,
-            posesMsg.estimatePose.pose.position.z,
+            posesMsg.estimateArCamPose.pose.position.x,
+            posesMsg.estimateArCamPose.pose.position.y,
+            posesMsg.estimateArCamPose.pose.position.z,
 
-            posesMsg.truePose.pose.position.x,
-            posesMsg.truePose.pose.position.y,
-            posesMsg.truePose.pose.position.z);
+            posesMsg.trueArCamPose.pose.position.x,
+            posesMsg.trueArCamPose.pose.position.y,
+            posesMsg.trueArCamPose.pose.position.z);
 }
 
 int main(int argc, char **argv) {

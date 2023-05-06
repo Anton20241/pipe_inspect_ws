@@ -1,2 +1,0 @@
-geometry_msgs/PoseStamped estimatePose
-geometry_msgs/PoseStamped truePose
