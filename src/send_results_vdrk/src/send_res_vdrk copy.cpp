@@ -86,7 +86,7 @@ void getCurrentArucoCameraPose(const tf::TransformListener& listener){
 }
 
 // получаем текущее оценочное положение маркера относительно ГСК
-void getEstimeteCurrentArucoCameraPose(){
+void getEstimateCurrentArucoOdomPose(){
   if (init) estimateCurrentArucoOdomPose = currentArucoOdomPose;
   init = false;
 }
@@ -116,7 +116,7 @@ void writeArucoPoseData2Bag(){
   if (currentArucoCameraPose == prevArucoCameraPose) return;
   if (factEqualEstimate()) return; 
 
-  geometry_msgs::Vector3 markerOffset; // фактическое смещение маркера
+  geometry_msgs::Vector3 markerOffset; // фактическое перемещение маркера
   
   // фактическое перемещение маркера
   markerOffset.x = abs(getDistance(currentArucoCameraPose.pose.position.x, prevArucoCameraPose.pose.position.x));
@@ -183,8 +183,8 @@ int main(int argc, char **argv) {
     getEstimateCurrentArucoCameraPoseCallback = false;
     getCurrentArucoOdomPoseCallback           = false;
 
-    getCurrentArucoCameraPose(listener);                                           // текущее фактическое положение маркера относительно камеры
-    getEstimeteCurrentArucoCameraPose();                                           // текущее   оценочное положение маркера относительно ГСК
+    getCurrentArucoCameraPose(listener);                            // текущее фактическое положение маркера относительно камеры
+    getEstimateCurrentArucoOdomPose();                              // текущее   оценочное положение маркера относительно ГСК
     
     writeArucoPoseData2Bag();
 

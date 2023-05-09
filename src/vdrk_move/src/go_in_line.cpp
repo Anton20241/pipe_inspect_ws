@@ -83,7 +83,7 @@ void stop_turtle(size_t type){
   
 }
 
-double getDistanceToGoal(const double desired, const double current) {
+double getDistance(const double desired, const double current) {
   return desired - current;
 }
 
@@ -95,16 +95,16 @@ void setTurtleVelocity(size_t type) {
 
   if (type == TURTLE_FRONT) {
 
-    distanceToGoal_x = ( 1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.x, estimateCurrentArucoCameraPose.pose.position.x);
-    distanceToGoal_y = ( 1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.z, estimateCurrentArucoCameraPose.pose.position.z);
-    distanceToGoal_z = (-1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.y, estimateCurrentArucoCameraPose.pose.position.y);
+    distanceToGoal_x = ( 1) * getDistance(desiredArucoCameraPose.pose.position.x, estimateCurrentArucoCameraPose.pose.position.x);
+    distanceToGoal_y = ( 1) * getDistance(desiredArucoCameraPose.pose.position.z, estimateCurrentArucoCameraPose.pose.position.z);
+    distanceToGoal_z = (-1) * getDistance(desiredArucoCameraPose.pose.position.y, estimateCurrentArucoCameraPose.pose.position.y);
   }
 
   if (type == TURTLE_BACK) {
 
-    distanceToGoal_x = (-1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.x, estimateCurrentArucoCameraPose.pose.position.x);
-    distanceToGoal_y = (-1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.z, estimateCurrentArucoCameraPose.pose.position.z);
-    distanceToGoal_z = ( 1) * getDistanceToGoal(desiredArucoCameraPose.pose.position.y, estimateCurrentArucoCameraPose.pose.position.y);
+    distanceToGoal_x = (-1) * getDistance(desiredArucoCameraPose.pose.position.x, estimateCurrentArucoCameraPose.pose.position.x);
+    distanceToGoal_y = (-1) * getDistance(desiredArucoCameraPose.pose.position.z, estimateCurrentArucoCameraPose.pose.position.z);
+    distanceToGoal_z = ( 1) * getDistance(desiredArucoCameraPose.pose.position.y, estimateCurrentArucoCameraPose.pose.position.y);
   }
 
   ROS_INFO("\n"
