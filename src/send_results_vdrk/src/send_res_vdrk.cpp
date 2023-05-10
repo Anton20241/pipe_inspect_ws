@@ -17,10 +17,10 @@ ros::Publisher arucoResDataBagPub;
 
 geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее      оценочное положение маркера относительно камеры
 geometry_msgs::PoseStamped estimatePrevArucoCameraPose;           // предыдущее   оценочное положение маркера относительно камеры
-geometry_msgs::PoseStamped currentArucoCameraPose;                // текущее      фактическое положение маркера относительно камеры
-geometry_msgs::PoseStamped prevArucoCameraPose;                   // предыдущее   фактическое положение маркера относительно камеры
-geometry_msgs::PoseStamped currentArucoOdomPose;                  // текущее      фактическое положение маркера относительно ГСК
-geometry_msgs::PoseStamped prevArucoOdomPose;                     // предыдущее   фактическое положение маркера относительно ГСК
+geometry_msgs::PoseStamped currentArucoCameraPose;                // текущее    фактическое положение маркера относительно камеры
+geometry_msgs::PoseStamped prevArucoCameraPose;                   // предыдущее фактическое положение маркера относительно камеры
+geometry_msgs::PoseStamped currentArucoOdomPose;                  // текущее    фактическое положение маркера относительно ГСК
+geometry_msgs::PoseStamped prevArucoOdomPose;                     // предыдущее фактическое положение маркера относительно ГСК
 geometry_msgs::PoseStamped estimateCurrentArucoOdomPose;          // текущее      оценочное положение маркера относительно ГСК
 
 bool allPosesGet      = false;                                    // все положения получены
@@ -84,14 +84,13 @@ void getEstimateCurrentArucoOdomPose(const tf::TransformListener& listener){
 
   if (start){
     start = false;
-    estimateCurrentArucoOdomPose = currentArucoOdomPose;
-    estimatePrevArucoCameraPose = estimateCurrentArucoCameraPose;
+    estimateCurrentArucoOdomPose = currentArucoOdomPose;          //текущее оц пол-е маркера отн ГСК = текущее факт пол-е маркера отн ГСК
+    estimatePrevArucoCameraPose = estimateCurrentArucoCameraPose; //пред оц пол-е маркера отн камеры = текущее оц пол-е маркера отн камеры
     getPoseEstOdom = true;
     return;
   }
 
-  if (equal(estimateCurrentArucoCameraPose, estimatePrevArucoCameraPose, 0.001) || // передний маркер относительно камеры не двигался
-      equal(currentArucoOdomPose, prevArucoOdomPose, 0.001)){                      // передний маркер относительно мира   не двигался
+  if (equal(currentArucoOdomPose, prevArucoOdomPose, 0.001)){           // передний маркер относительно мира   не двигался
     estimatePrevArucoCameraPose = estimateCurrentArucoCameraPose;
     getPoseEstOdom = true;
     return;
@@ -111,7 +110,6 @@ void getEstimateCurrentArucoOdomPose(const tf::TransformListener& listener){
     delta_XYZ_estimateCam.pose.position.y    = estimateCurrentArucoCameraPose.pose.position.y - estimatePrevArucoCameraPose.pose.position.y;
     delta_XYZ_estimateCam.pose.position.z    = estimateCurrentArucoCameraPose.pose.position.z - estimatePrevArucoCameraPose.pose.position.z;
     estimatePrevArucoCameraPose              = estimateCurrentArucoCameraPose;
-    prevArucoOdomPose                        = currentArucoOdomPose;
     delta_XYZ_estimateOdom                   = delta_XYZ_estimateCam;
 
     delta_XYZ_estimateOdom.pose.position.x   = ( 1) * delta_XYZ_estimateCam.pose.position.x;
@@ -134,25 +132,27 @@ void getEstimateCurrentArucoOdomPose(const tf::TransformListener& listener){
 }
 
 void showPoses(){
-  printf("\n[текущее оценочное положение маркера относительно камеры]\n");
+  printf("\n######################################################\n");
+  printf("[текущее оценочное положение маркера относительно камеры]\n");
   printf("estimateCurrentArucoCameraPose.pose.position.x = %f\n", estimateCurrentArucoCameraPose.pose.position.x);
   printf("estimateCurrentArucoCameraPose.pose.position.y = %f\n", estimateCurrentArucoCameraPose.pose.position.y);
   printf("estimateCurrentArucoCameraPose.pose.position.z = %f\n", estimateCurrentArucoCameraPose.pose.position.z);
-
+  printf("------------------------------------------------------\n");
   printf("[текущее фактическое положение маркера относительно камеры]\n");
   printf("currentArucoCameraPose.pose.position.x         = %f\n", currentArucoCameraPose.pose.position.x);
   printf("currentArucoCameraPose.pose.position.y         = %f\n", currentArucoCameraPose.pose.position.y);
   printf("currentArucoCameraPose.pose.position.z         = %f\n", currentArucoCameraPose.pose.position.z);
-
+  printf("------------------------------------------------------\n");
   printf("[текущее оценочное положение маркера относительно ГСК]\n");
   printf("estimateCurrentArucoOdomPose.pose.position.x   = %f\n", estimateCurrentArucoOdomPose.pose.position.x);
   printf("estimateCurrentArucoOdomPose.pose.position.y   = %f\n", estimateCurrentArucoOdomPose.pose.position.y);
   printf("estimateCurrentArucoOdomPose.pose.position.z   = %f\n", estimateCurrentArucoOdomPose.pose.position.z);
-
+  printf("------------------------------------------------------\n");
   printf("[текущее фактическое положение маркера относительно ГСК]\n");
   printf("currentArucoOdomPose.pose.position.x           = %f\n", currentArucoOdomPose.pose.position.x);
   printf("currentArucoOdomPose.pose.position.y           = %f\n", currentArucoOdomPose.pose.position.y);
   printf("currentArucoOdomPose.pose.position.z           = %f\n", currentArucoOdomPose.pose.position.z);
+  printf("######################################################\n");
 }
 
 // расстояние между точками
@@ -169,62 +169,24 @@ void setres2Write(){
 
 // записываем результаты эксперимента
 void writeArucoPoseData2Bag(){
-
   //showPoses();
 
-  if (equal(estimateCurrentArucoCameraPose, estimatePrevArucoCameraPose, 0.001) || // передний маркер относительно камеры не двигался
-      equal(currentArucoOdomPose, prevArucoOdomPose, 0.001)){                      // передний маркер относительно мира   не двигался
+  if (equal(currentArucoOdomPose, prevArucoOdomPose, 0.001)){         // передний маркер относительно мира   не двигался
     return;
   };
 
   geometry_msgs::Vector3 markerOffset; // фактическое перемещение маркера относительно ГСК
-  markerOffset.x = abs(getDistance(currentArucoOdomPose.pose.position.x, prevArucoOdomPose.pose.position.x));
-  markerOffset.y = abs(getDistance(currentArucoOdomPose.pose.position.y, prevArucoOdomPose.pose.position.y));
-  markerOffset.z = abs(getDistance(currentArucoOdomPose.pose.position.z, prevArucoOdomPose.pose.position.z));
+  markerOffset.x    = abs(getDistance(currentArucoOdomPose.pose.position.x, prevArucoOdomPose.pose.position.x));
+  markerOffset.y    = abs(getDistance(currentArucoOdomPose.pose.position.y, prevArucoOdomPose.pose.position.y));
+  markerOffset.z    = abs(getDistance(currentArucoOdomPose.pose.position.z, prevArucoOdomPose.pose.position.z));
   double markerSpaceOffset = std::sqrt(std::pow(markerOffset.x, 2) + std::pow(markerOffset.y, 2) + std::pow(markerOffset.z, 2));
-  
+
   if (markerSpaceOffset > MEASURE_STEP) {
-    prevArucoCameraPose = currentArucoCameraPose;
+    prevArucoOdomPose = currentArucoOdomPose;
     setres2Write();
     arucoResDataBagPub.publish(res2Write);
-    ROS_INFO("\n"
-              "######################################################\n"
-              "[markerSpaceOffset = %.5f] \n"
-              "!!! SEND POSES DATA !!!\n"
-              "estimateCurrentArucoCameraPose.pose.position.x = %.5f \n"
-              "estimateCurrentArucoCameraPose.pose.position.y = %.5f \n"
-              "estimateCurrentArucoCameraPose.pose.position.z = %.5f \n"
-              "------------------------------------------------------\n"
-              "currentArucoCameraPose.pose.position.x         = %.5f \n"
-              "currentArucoCameraPose.pose.position.y         = %.5f \n"
-              "currentArucoCameraPose.pose.position.z         = %.5f \n"
-              "------------------------------------------------------\n"
-              "estimateCurrentArucoOdomPose.pose.position.x   = %.5f \n"
-              "estimateCurrentArucoOdomPose.pose.position.y   = %.5f \n"
-              "estimateCurrentArucoOdomPose.pose.position.z   = %.5f \n"
-              "------------------------------------------------------\n"
-              "currentArucoOdomPose.pose.position.x           = %.5f \n"
-              "currentArucoOdomPose.pose.position.y           = %.5f \n"
-              "currentArucoOdomPose.pose.position.z           = %.5f \n"
-              "######################################################\n\n",
-              
-              markerSpaceOffset,
-
-              estimateCurrentArucoCameraPose.pose.position.x,
-              estimateCurrentArucoCameraPose.pose.position.y,
-              estimateCurrentArucoCameraPose.pose.position.z,
-
-              currentArucoCameraPose.pose.position.x,
-              currentArucoCameraPose.pose.position.y,
-              currentArucoCameraPose.pose.position.z,
-
-              estimateCurrentArucoOdomPose.pose.position.x,
-              estimateCurrentArucoOdomPose.pose.position.y,
-              estimateCurrentArucoOdomPose.pose.position.z,
-
-              currentArucoOdomPose.pose.position.x,
-              currentArucoOdomPose.pose.position.y,
-              currentArucoOdomPose.pose.position.z);
+    showPoses();
+  } else {
   }
 }
 
