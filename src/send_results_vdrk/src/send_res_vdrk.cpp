@@ -90,7 +90,7 @@ void getEstimateCurrentArucoOdomPose(const tf::TransformListener& listener){
     return;
   }
 
-  if (equal(currentArucoOdomPose, prevArucoOdomPose, 0.001)){           // передний маркер относительно мира   не двигался
+  if (equal(currentArucoOdomPose, prevArucoOdomPose, 0.001)){           // передний маркер относительно мира не двигался
     estimatePrevArucoCameraPose = estimateCurrentArucoCameraPose;
     getPoseEstOdom = true;
     return;
@@ -169,24 +169,22 @@ void setres2Write(){
 
 // записываем результаты эксперимента
 void writeArucoPoseData2Bag(){
-  //showPoses();
 
-  if (equal(currentArucoOdomPose, prevArucoOdomPose, 0.001)){         // передний маркер относительно мира   не двигался
-    return;
-  };
+  if (equal(currentArucoOdomPose,           prevArucoOdomPose,      0.001)) return; // передний маркер относительно мира не двигался
+  if (equal(estimateCurrentArucoCameraPose, currentArucoCameraPose, 0.001)) return; // оценка близка к факту отн камеры
+  if (equal(estimateCurrentArucoOdomPose,   currentArucoOdomPose,   0.001)) return; // оценка близка к факту отн ГСК
 
   geometry_msgs::Vector3 markerOffset; // фактическое перемещение маркера относительно ГСК
   markerOffset.x    = abs(getDistance(currentArucoOdomPose.pose.position.x, prevArucoOdomPose.pose.position.x));
   markerOffset.y    = abs(getDistance(currentArucoOdomPose.pose.position.y, prevArucoOdomPose.pose.position.y));
   markerOffset.z    = abs(getDistance(currentArucoOdomPose.pose.position.z, prevArucoOdomPose.pose.position.z));
   double markerSpaceOffset = std::sqrt(std::pow(markerOffset.x, 2) + std::pow(markerOffset.y, 2) + std::pow(markerOffset.z, 2));
+  prevArucoOdomPose = currentArucoOdomPose;
 
-  if (markerSpaceOffset > MEASURE_STEP) {
-    prevArucoOdomPose = currentArucoOdomPose;
+  if (1) {   //  markerSpaceOffset > MEASURE_STEP
     setres2Write();
     arucoResDataBagPub.publish(res2Write);
     showPoses();
-  } else {
   }
 }
 

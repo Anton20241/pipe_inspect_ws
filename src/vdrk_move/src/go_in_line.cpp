@@ -11,7 +11,7 @@
 #include <gazebo_msgs/ModelStates.h>
 
 #define MIN_ROBOTS_DIST 2                                         // минимальное  расстояние между turtle_front & turtle_back
-#define MAX_ROBOTS_DIST 8                                         // максимальное расстояние между turtle_front & turtle_back
+#define MAX_ROBOTS_DIST 6                                         // максимальное расстояние между turtle_front & turtle_back
 
 geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее оц. положение маркера относительно камеры
 geometry_msgs::PoseStamped desiredArucoCameraPose;                // желаемое положение маркера относительно камеры
