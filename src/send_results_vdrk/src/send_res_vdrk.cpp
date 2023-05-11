@@ -14,6 +14,7 @@
 send_results_vdrk::Poses4 res2Write;
 // паблишер в топик на запись данных
 ros::Publisher arucoResDataBagPub;
+ros::Publisher cameraResDataBagPub;
 
 geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее      оценочное положение маркера относительно камеры
 geometry_msgs::PoseStamped estimatePrevArucoCameraPose;           // предыдущее   оценочное положение маркера относительно камеры
@@ -204,6 +205,9 @@ int main(int argc, char **argv){
 
   arucoResDataBagPub =
     node.advertise<send_results_vdrk::Poses4>("arucoResDataBagTopic", 0);
+
+  cameraResDataBagPub =
+    node.advertise<send_results_vdrk::Poses4>("cameraResDataBagTopic", 0);
 
   ros::Rate loop_rate(30);
 
