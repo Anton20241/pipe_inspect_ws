@@ -11,7 +11,7 @@
 #include <gazebo_msgs/ModelStates.h>
 
 #define MIN_ROBOTS_DIST 2                                         // минимальное  расстояние между turtle_front & turtle_back
-#define MAX_ROBOTS_DIST 6                                         // максимальное расстояние между turtle_front & turtle_back
+#define MAX_ROBOTS_DIST 8                                         // максимальное расстояние между turtle_front & turtle_back
 
 geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее оц. положение маркера относительно камеры
 geometry_msgs::PoseStamped desiredArucoCameraPose;                // желаемое положение маркера относительно камеры
@@ -55,18 +55,18 @@ void setup() {
   // desiredTurtleFrontOdomPose.pose.position.y = goal_y;
   // desiredTurtleFrontOdomPose.pose.position.z = goal_z;
 
-  velCmd2Turtle.linear.x = 0.0;
-  velCmd2Turtle.linear.y = 0.0;
-  velCmd2Turtle.linear.z = 0.0;
+  velCmd2Turtle.linear.x  = 0.0;
+  velCmd2Turtle.linear.y  = 0.0;
+  velCmd2Turtle.linear.z  = 0.0;
   velCmd2Turtle.angular.x = 0.0;
   velCmd2Turtle.angular.y = 0.0;
   velCmd2Turtle.angular.z = 0.0;
 }
 
 void stop_turtle(size_t type){
-  velCmd2Turtle.linear.x = 0.0;
-  velCmd2Turtle.linear.y = 0.0;
-  velCmd2Turtle.linear.z = 0.0;
+  velCmd2Turtle.linear.x  = 0.0;
+  velCmd2Turtle.linear.y  = 0.0;
+  velCmd2Turtle.linear.z  = 0.0;
   velCmd2Turtle.angular.x = 0.0;
   velCmd2Turtle.angular.y = 0.0;
   velCmd2Turtle.angular.z = 0.0;
@@ -115,7 +115,12 @@ void setTurtleVelocity(size_t type) {
 
   //velocity x
   if (abs(distanceToGoal_x) > move_precision) {
-    velCmd2Turtle.linear.x = velocity * distanceToGoal_x / abs(distanceToGoal_x);
+    velCmd2Turtle.linear.x  = velocity * distanceToGoal_x / abs(distanceToGoal_x);
+    velCmd2Turtle.linear.y  = 0.0;
+    velCmd2Turtle.linear.z  = 0.0;
+    velCmd2Turtle.angular.x = 0.0;
+    velCmd2Turtle.angular.y = 0.0;
+    velCmd2Turtle.angular.z = 0.0;
   }
   else {
     if (type != TURTLE_BACK){
@@ -127,7 +132,12 @@ void setTurtleVelocity(size_t type) {
 
   //velocity y
   if (abs(distanceToGoal_y) > move_precision) {
-    velCmd2Turtle.linear.y = velocity * distanceToGoal_y / abs(distanceToGoal_y);
+    velCmd2Turtle.linear.x  = 0.0;
+    velCmd2Turtle.linear.y  = velocity * distanceToGoal_y / abs(distanceToGoal_y);
+    velCmd2Turtle.linear.z  = 0.0;
+    velCmd2Turtle.angular.x = 0.0;
+    velCmd2Turtle.angular.y = 0.0;
+    velCmd2Turtle.angular.z = 0.0;
   }
   else {
     if (type != TURTLE_BACK){
@@ -139,7 +149,12 @@ void setTurtleVelocity(size_t type) {
 
   //velocity z
   if (abs(distanceToGoal_z) > move_precision) {
+    velCmd2Turtle.linear.x = 0.0;
+    velCmd2Turtle.linear.y = 0.0;
     velCmd2Turtle.linear.z = velocity * distanceToGoal_z / abs(distanceToGoal_z);
+    velCmd2Turtle.angular.x = 0.0;
+    velCmd2Turtle.angular.y = 0.0;
+    velCmd2Turtle.angular.z = 0.0;
   }
   else {
     if (type != TURTLE_BACK){
