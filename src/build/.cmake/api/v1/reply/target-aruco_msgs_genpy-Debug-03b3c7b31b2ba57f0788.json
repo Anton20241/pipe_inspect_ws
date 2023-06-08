@@ -1,0 +1,69 @@
+{
+	"backtrace" : 4,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"include",
+			"generate_messages",
+			"add_dependencies"
+		],
+		"files" : 
+		[
+			"build/aruco_ros/aruco_msgs/cmake/aruco_msgs-genmsg.cmake",
+			"/opt/ros/noetic/share/genmsg/cmake/genmsg-extras.cmake",
+			"aruco_ros/aruco_msgs/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 2,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 307,
+				"parent" : 1
+			},
+			{
+				"file" : 0,
+				"parent" : 2
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 233,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 234,
+				"parent" : 3
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 5,
+			"id" : "aruco_msgs_generate_messages_py::@d70c884c85295080cd2f"
+		}
+	],
+	"id" : "aruco_msgs_genpy::@d70c884c85295080cd2f",
+	"name" : "aruco_msgs_genpy",
+	"paths" : 
+	{
+		"build" : "aruco_ros/aruco_msgs",
+		"source" : "aruco_ros/aruco_msgs"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

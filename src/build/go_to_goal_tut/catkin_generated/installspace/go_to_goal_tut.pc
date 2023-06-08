@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: go_to_goal_tut
+Description: Description of go_to_goal_tut
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

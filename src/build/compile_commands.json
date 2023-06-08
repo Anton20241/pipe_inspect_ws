@@ -1,0 +1,217 @@
+[
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/gtest/googlemock",
+  "command": "/usr/bin/g++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_main_EXPORTS -isystem /usr/src/googletest/googlemock/include -isystem /usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /usr/src/googletest/googlemock/src/gmock_main.cc",
+  "file": "/usr/src/googletest/googlemock/src/gmock_main.cc"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/gtest/googlemock",
+  "command": "/usr/bin/g++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_EXPORTS -I/usr/src/googletest/googlemock/include -I/usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /usr/src/googletest/googlemock/src/gmock-all.cc",
+  "file": "/usr/src/googletest/googlemock/src/gmock-all.cc"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/gtest/googletest",
+  "command": "/usr/bin/g++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_main_EXPORTS -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/googletest/googletest/src/gtest_main.cc",
+  "file": "/usr/src/googletest/googletest/src/gtest_main.cc"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/gtest/googletest",
+  "command": "/usr/bin/g++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_EXPORTS -I/usr/src/googletest/googletest/include -I/usr/src/googletest/googletest  -g -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/googletest/googletest/src/gtest-all.cc",
+  "file": "/usr/src/googletest/googletest/src/gtest-all.cc"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/go_to_goal_tut",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"go_to_goal_tut\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/go_to_goal_tut.dir/src/go_to_goal_tut.cpp.o -c /home/anton20241/pipe_inspect_ws/src/go_to_goal_tut/src/go_to_goal_tut.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/go_to_goal_tut/src/go_to_goal_tut.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/marker_move",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"marker_move\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/go_in_circle.dir/src/go_in_circle.cpp.o -c /home/anton20241/pipe_inspect_ws/src/marker_move/src/go_in_circle.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/marker_move/src/go_in_circle.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/marker_move",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"marker_move\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/go_to_goal.dir/src/go_to_goal.cpp.o -c /home/anton20241/pipe_inspect_ws/src/marker_move/src/go_to_goal.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/marker_move/src/go_to_goal.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/show_pose",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"show_pose\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/show_pose.dir/src/show_pose.cpp.o -c /home/anton20241/pipe_inspect_ws/src/show_pose/src/show_pose.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/show_pose/src/show_pose.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/cameraparameters.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/cameraparameters.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/cameraparameters.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/cvdrawingutils.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/cvdrawingutils.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/cvdrawingutils.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/debug.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/debug.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/debug.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/dictionary_based.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/dictionary_based.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/dictionary_based.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/dictionary.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/dictionary.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/dictionary.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/fractaldetector.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractaldetector.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractaldetector.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/ippe.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/ippe.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/ippe.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/marker.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/marker.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/marker.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/markerdetector_impl.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/markerdetector_impl.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/markerdetector_impl.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/markerdetector.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/markerdetector.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/markerdetector.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/markerlabeler.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/markerlabeler.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/markerlabeler.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/markermap.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/markermap.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/markermap.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/posetracker.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/posetracker.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/posetracker.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/fractallabelers/fractallabeler.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractallabelers/fractallabeler.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractallabelers/fractallabeler.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/fractallabelers/fractalmarker.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractallabelers/fractalmarker.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractallabelers/fractalmarker.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/fractallabelers/fractalmarkerset.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractallabelers/fractalmarkerset.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractallabelers/fractalmarkerset.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco",
+  "command": "/usr/bin/g++  -DROS_BUILD_SHARED_LIBS=1 -Daruco_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include/aruco -isystem /usr/include/opencv4 -isystem /usr/include/eigen3  -g -fPIC   -std=gnu++11 -o CMakeFiles/aruco.dir/src/aruco/fractallabelers/fractalposetracker.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractallabelers/fractalposetracker.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/src/aruco/fractallabelers/fractalposetracker.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco_ros",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"aruco_ros\\\" -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/include -isystem /home/anton20241/pipe_inspect_ws/src/build/devel/include -isystem /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include -isystem /opt/ros/noetic/include -isystem /opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -std=c++11 -o CMakeFiles/marker_publisher.dir/src/marker_publish.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/marker_publish.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/marker_publish.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco_ros",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"aruco_ros\\\" -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/include -isystem /home/anton20241/pipe_inspect_ws/src/build/devel/include -isystem /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include -isystem /opt/ros/noetic/include -isystem /opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -std=c++11 -o CMakeFiles/marker_publisher.dir/src/aruco_ros_utils.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/aruco_ros_utils.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/aruco_ros_utils.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco_ros",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"aruco_ros\\\" -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/include -isystem /home/anton20241/pipe_inspect_ws/src/build/devel/include -isystem /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include -isystem /opt/ros/noetic/include -isystem /opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -std=c++11 -o CMakeFiles/single.dir/src/simple_single.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/simple_single.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/simple_single.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco_ros",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"aruco_ros\\\" -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/include -isystem /home/anton20241/pipe_inspect_ws/src/build/devel/include -isystem /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include -isystem /opt/ros/noetic/include -isystem /opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -std=c++11 -o CMakeFiles/single.dir/src/aruco_ros_utils.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/aruco_ros_utils.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/aruco_ros_utils.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco_ros",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"aruco_ros\\\" -Daruco_ros_utils_EXPORTS -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/include -isystem /home/anton20241/pipe_inspect_ws/src/build/devel/include -isystem /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include -isystem /opt/ros/noetic/include -isystem /opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g -fPIC   -std=c++11 -o CMakeFiles/aruco_ros_utils.dir/src/aruco_ros_utils.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/aruco_ros_utils.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/aruco_ros_utils.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco_ros",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"aruco_ros\\\" -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/include -isystem /home/anton20241/pipe_inspect_ws/src/build/devel/include -isystem /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include -isystem /opt/ros/noetic/include -isystem /opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -std=c++11 -o CMakeFiles/double.dir/src/simple_double.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/simple_double.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/simple_double.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/aruco_ros/aruco_ros",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"aruco_ros\\\" -I/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/include -isystem /home/anton20241/pipe_inspect_ws/src/build/devel/include -isystem /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco/include -isystem /opt/ros/noetic/include -isystem /opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -std=c++11 -o CMakeFiles/double.dir/src/aruco_ros_utils.cpp.o -c /home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/aruco_ros_utils.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/aruco_ros/aruco_ros/src/aruco_ros_utils.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/send_estimate_data",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"send_estimate_data\\\" -I/home/anton20241/pipe_inspect_ws/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/aruco_posesCatch2Write.dir/src/aruco_posesCatch2Write.cpp.o -c /home/anton20241/pipe_inspect_ws/src/send_estimate_data/src/aruco_posesCatch2Write.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/send_estimate_data/src/aruco_posesCatch2Write.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/send_estimate_data",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"send_estimate_data\\\" -I/home/anton20241/pipe_inspect_ws/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/camera_frame_broadcaster.dir/src/camera_frame_broadcaster.cpp.o -c /home/anton20241/pipe_inspect_ws/src/send_estimate_data/src/camera_frame_broadcaster.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/send_estimate_data/src/camera_frame_broadcaster.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/send_estimate_data",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"send_estimate_data\\\" -I/home/anton20241/pipe_inspect_ws/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/aruco_posesSend.dir/src/aruco_posesSend.cpp.o -c /home/anton20241/pipe_inspect_ws/src/send_estimate_data/src/aruco_posesSend.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/send_estimate_data/src/aruco_posesSend.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/send_results_vdrk",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"send_results_vdrk\\\" -I/home/anton20241/pipe_inspect_ws/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/res_catch2_write.dir/src/res_catch2_write.cpp.o -c /home/anton20241/pipe_inspect_ws/src/send_results_vdrk/src/res_catch2_write.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/send_results_vdrk/src/res_catch2_write.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/send_results_vdrk",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"send_results_vdrk\\\" -I/home/anton20241/pipe_inspect_ws/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/send_res_vdrk.dir/src/send_res_vdrk.cpp.o -c /home/anton20241/pipe_inspect_ws/src/send_results_vdrk/src/send_res_vdrk.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/send_results_vdrk/src/send_res_vdrk.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/send_results_vdrk",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"send_results_vdrk\\\" -I/home/anton20241/pipe_inspect_ws/src/build/devel/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/cam_frame_broadcaster.dir/src/cam_frame_broadcaster.cpp.o -c /home/anton20241/pipe_inspect_ws/src/send_results_vdrk/src/cam_frame_broadcaster.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/send_results_vdrk/src/cam_frame_broadcaster.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/track_make",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"track_make\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -isystem /usr/include/opencv4  -g   -o CMakeFiles/track_make.dir/src/track_make.cpp.o -c /home/anton20241/pipe_inspect_ws/src/track_make/src/track_make.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/track_make/src/track_make.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/track_make",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"track_make\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/camera_frame_broadcaster_tm.dir/src/camera_frame_broadcaster.cpp.o -c /home/anton20241/pipe_inspect_ws/src/track_make/src/camera_frame_broadcaster.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/track_make/src/camera_frame_broadcaster.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/vdrk_move",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"vdrk_move\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/go_in_radius.dir/src/go_in_radius.cpp.o -c /home/anton20241/pipe_inspect_ws/src/vdrk_move/src/go_in_radius.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/vdrk_move/src/go_in_radius.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/vdrk_move",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"vdrk_move\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/go_in_line.dir/src/go_in_line.cpp.o -c /home/anton20241/pipe_inspect_ws/src/vdrk_move/src/go_in_line.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/vdrk_move/src/go_in_line.cpp"
+},
+{
+  "directory": "/home/anton20241/pipe_inspect_ws/src/build/vdrk_move",
+  "command": "/usr/bin/g++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"vdrk_move\\\" -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp  -g   -o CMakeFiles/broadcaster.dir/src/broadcaster.cpp.o -c /home/anton20241/pipe_inspect_ws/src/vdrk_move/src/broadcaster.cpp",
+  "file": "/home/anton20241/pipe_inspect_ws/src/vdrk_move/src/broadcaster.cpp"
+}
+]

@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: noisy_distorted_camera
+Description: Description of noisy_distorted_camera
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

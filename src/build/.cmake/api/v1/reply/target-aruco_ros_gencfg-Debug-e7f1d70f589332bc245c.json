@@ -1,0 +1,81 @@
+{
+	"backtrace" : 2,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"generate_dynamic_reconfigure_options"
+		],
+		"files" : 
+		[
+			"/opt/ros/noetic/share/dynamic_reconfigure/cmake/dynamic_reconfigure-macros.cmake",
+			"aruco_ros/aruco_ros/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 20,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 84,
+				"parent" : 1
+			}
+		]
+	},
+	"id" : "aruco_ros_gencfg::@14a364570629ea9f2448",
+	"name" : "aruco_ros_gencfg",
+	"paths" : 
+	{
+		"build" : "aruco_ros/aruco_ros",
+		"source" : "aruco_ros/aruco_ros"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 2,
+			"isGenerated" : true,
+			"path" : "build/aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/devel/include/aruco_ros/ArucoThresholdConfig.h.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

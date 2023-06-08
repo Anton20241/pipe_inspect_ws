@@ -13,8 +13,8 @@
 #define MIN_ROBOTS_DIST 2                                         // минимальное  расстояние между turtle_front & turtle_back
 #define MAX_ROBOTS_DIST 8                                         // максимальное расстояние между turtle_front & turtle_back
 
-geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее оц. положение маркера относительно камеры
-geometry_msgs::PoseStamped desiredArucoCameraPose;                // желаемое положение маркера относительно камеры
+geometry_msgs::PoseStamped estCrntCamZrPntPose;                   // текущее оц. положение маркера относительно камеры
+geometry_msgs::PoseStamped desiredCamZrPntPose;                   // желаемое положение маркера относительно камеры
 
 // geometry_msgs::PoseStamped currentTurtleFrontOdomPose;         // текущее  положение turtle_front относительно ГСК
 // geometry_msgs::PoseStamped desiredTurtleFrontOdomPose;         // желаемое положение turtle_front относительно ГСК
@@ -30,205 +30,59 @@ enum TurtleType{
   TURTLE_BACK
 };
 
-// double goal_x = 0;
-// double goal_y = 0;
-// double goal_z = 0;
 double velocity = 0;
-double move_precision = 0;
 
 bool turtle_back_stop     = true;
 bool turtle_front_stop    = true;
-bool turtle_front_start   = true;
-bool turtle_back_start    = false;
-
-bool allCallbacksCall = false;                                    // все колбеки вызваны
-bool getEstimateCurrentArucoCameraPoseCallback = false;
-bool getCurrentTurtleFrontOdomPoseCallback = false;
-
-// bool goal_x_reached = false;
-// bool goal_y_reached = false;
-// bool goal_z_reached = false;
+bool getPoseEstZrPnt      = false;
 
 void setup() {
- 
-  // desiredTurtleFrontOdomPose.pose.position.x = goal_x;
-  // desiredTurtleFrontOdomPose.pose.position.y = goal_y;
-  // desiredTurtleFrontOdomPose.pose.position.z = goal_z;
-
   velCmd2Turtle.linear.x  = 0.0;
   velCmd2Turtle.linear.y  = 0.0;
   velCmd2Turtle.linear.z  = 0.0;
   velCmd2Turtle.angular.x = 0.0;
   velCmd2Turtle.angular.y = 0.0;
   velCmd2Turtle.angular.z = 0.0;
-}
-
-void stop_turtle(size_t type){
-  velCmd2Turtle.linear.x  = 0.0;
-  velCmd2Turtle.linear.y  = 0.0;
-  velCmd2Turtle.linear.z  = 0.0;
-  velCmd2Turtle.angular.x = 0.0;
-  velCmd2Turtle.angular.y = 0.0;
-  velCmd2Turtle.angular.z = 0.0;
-
-  if (type == TURTLE_FRONT){
-    velCmd2TurtleFront.publish(velCmd2Turtle);
-    turtle_front_stop = true;
-  }
-
-  if (type == TURTLE_BACK){
-    velCmd2TurtleBack.publish(velCmd2Turtle);
-    turtle_back_stop = true;
-  }
-  
-}
-
-double getDistance(const double desired, const double current) {
-  return desired - current;
-}
-
-void setTurtleVelocity(size_t type) {
-
-  double distanceToGoal_x;
-  double distanceToGoal_y;
-  double distanceToGoal_z;
-
-  if (type == TURTLE_FRONT) {
-
-    distanceToGoal_x = ( 1) * getDistance(desiredArucoCameraPose.pose.position.x, estimateCurrentArucoCameraPose.pose.position.x);
-    distanceToGoal_y = ( 1) * getDistance(desiredArucoCameraPose.pose.position.z, estimateCurrentArucoCameraPose.pose.position.z);
-    distanceToGoal_z = (-1) * getDistance(desiredArucoCameraPose.pose.position.y, estimateCurrentArucoCameraPose.pose.position.y);
-  }
-
-  if (type == TURTLE_BACK) {
-
-    distanceToGoal_x = (-1) * getDistance(desiredArucoCameraPose.pose.position.x, estimateCurrentArucoCameraPose.pose.position.x);
-    distanceToGoal_y = (-1) * getDistance(desiredArucoCameraPose.pose.position.z, estimateCurrentArucoCameraPose.pose.position.z);
-    distanceToGoal_z = ( 1) * getDistance(desiredArucoCameraPose.pose.position.y, estimateCurrentArucoCameraPose.pose.position.y);
-  }
-
-  ROS_INFO("\n"
-          "distanceToGoal_x = %.5f\n"
-          "distanceToGoal_y = %.5f\n"
-          "distanceToGoal_z = %.5f",
-          distanceToGoal_x, distanceToGoal_y, distanceToGoal_z);
-
-  //velocity x
-  if (abs(distanceToGoal_x) > move_precision) {
-    velCmd2Turtle.linear.x  = velocity * distanceToGoal_x / abs(distanceToGoal_x);
-    velCmd2Turtle.linear.y  = 0.0;
-    velCmd2Turtle.linear.z  = 0.0;
-    velCmd2Turtle.angular.x = 0.0;
-    velCmd2Turtle.angular.y = 0.0;
-    velCmd2Turtle.angular.z = 0.0;
-  }
-  else {
-    if (type != TURTLE_BACK){
-      ROS_INFO("goal_x_reached!");
-      //goal_x_reached = true;
-    }
-    velCmd2Turtle.linear.x = 0;
-  }
-
-  //velocity y
-  if (abs(distanceToGoal_y) > move_precision) {
-    velCmd2Turtle.linear.x  = 0.0;
-    velCmd2Turtle.linear.y  = velocity * distanceToGoal_y / abs(distanceToGoal_y);
-    velCmd2Turtle.linear.z  = 0.0;
-    velCmd2Turtle.angular.x = 0.0;
-    velCmd2Turtle.angular.y = 0.0;
-    velCmd2Turtle.angular.z = 0.0;
-  }
-  else {
-    if (type != TURTLE_BACK){
-      ROS_INFO("goal_y_reached!");
-      //goal_y_reached = true;
-    }
-    velCmd2Turtle.linear.y = 0;
-  }
-
-  //velocity z
-  if (abs(distanceToGoal_z) > move_precision) {
-    velCmd2Turtle.linear.x = 0.0;
-    velCmd2Turtle.linear.y = 0.0;
-    velCmd2Turtle.linear.z = velocity * distanceToGoal_z / abs(distanceToGoal_z);
-    velCmd2Turtle.angular.x = 0.0;
-    velCmd2Turtle.angular.y = 0.0;
-    velCmd2Turtle.angular.z = 0.0;
-  }
-  else {
-    if (type != TURTLE_BACK){
-      ROS_INFO("goal_z_reached!");
-      //goal_z_reached = true;
-    }
-    velCmd2Turtle.linear.z = 0;
-  }
 }
 
 void go_turtle_front(){
 
-  if (distance_between_robots < (MAX_ROBOTS_DIST - move_precision) && turtle_back_stop) {
-    if (turtle_front_start){
-      std::cout << "turtle_front_start\n";
-      desiredArucoCameraPose = estimateCurrentArucoCameraPose;
-      desiredArucoCameraPose.pose.position.z = MAX_ROBOTS_DIST;
-      turtle_front_start = false;
-    }
-    setTurtleVelocity(TURTLE_FRONT);
+  if ((distance_between_robots < MAX_ROBOTS_DIST) && turtle_back_stop) {
+    velCmd2Turtle.linear.y  = velocity;
     velCmd2TurtleFront.publish(velCmd2Turtle);
     turtle_front_stop = false;
   } else {
-    stop_turtle(TURTLE_FRONT);
+    velCmd2Turtle.linear.y  = 0;
+    velCmd2TurtleFront.publish(velCmd2Turtle);
+    turtle_front_stop = true;
   }
-  if (turtle_back_stop && turtle_front_stop) turtle_back_start = true;
-
 }
 
 void go_turtle_back(){
 
-  if (distance_between_robots > (MIN_ROBOTS_DIST + move_precision) && turtle_front_stop) {
-    if (turtle_back_start){
-      std::cout << "turtle_back_start\n";
-      desiredArucoCameraPose = estimateCurrentArucoCameraPose;
-      desiredArucoCameraPose.pose.position.z = MIN_ROBOTS_DIST;
-      turtle_back_start = false;
-    }
-    setTurtleVelocity(TURTLE_BACK);
+  if ((distance_between_robots > MIN_ROBOTS_DIST) && turtle_front_stop) {
+    velCmd2Turtle.linear.y  = velocity;
     velCmd2TurtleBack.publish(velCmd2Turtle);
     turtle_back_stop = false;
   } else {
-    stop_turtle(TURTLE_BACK);
+    velCmd2Turtle.linear.y  = 0;
+    velCmd2TurtleBack.publish(velCmd2Turtle);
+    turtle_back_stop = true;
   }
-  if (turtle_back_stop && turtle_front_stop) turtle_front_start = true;
-
 }
 
-// // тек позиция переднего робота
-// void getCurrentTurtleFrontOdomPose(const gazebo_msgs::ModelStates& turtleFrontMsg) {
-//   currentTurtleFrontOdomPose.pose.position.x = turtleFrontMsg.pose[1].position.x;
-//   currentTurtleFrontOdomPose.pose.position.y = turtleFrontMsg.pose[1].position.y;
-//   currentTurtleFrontOdomPose.pose.position.z = turtleFrontMsg.pose[1].position.z;
-
-//   currentTurtleFrontOdomPose.pose.orientation.w = turtleFrontMsg.pose[1].orientation.w;
-//   currentTurtleFrontOdomPose.pose.orientation.x = turtleFrontMsg.pose[1].orientation.x;
-//   currentTurtleFrontOdomPose.pose.orientation.y = turtleFrontMsg.pose[1].orientation.y;
-//   currentTurtleFrontOdomPose.pose.orientation.z = turtleFrontMsg.pose[1].orientation.z;
-
-//   getCurrentTurtleFrontOdomPoseCallback = true;
-// }
-
-// тек оценка маркера относительно камеры
-void getEstimateCurrentArucoCameraPose(const geometry_msgs::PoseStamped& arucoCameraMsg) { 
-  estimateCurrentArucoCameraPose = arucoCameraMsg;
-  getEstimateCurrentArucoCameraPoseCallback = true;
+// тек оценка маркера относительно 0 точки
+void getCrntEstZrPntPose(const geometry_msgs::PoseStamped& arucoCameraMsg) { 
+  estCrntCamZrPntPose = arucoCameraMsg;
+  getPoseEstZrPnt     = true;
 }
 
-void go_to_goal(){
+void go_vdrk_in_line(){
 
-  // расстояние между маркером и камерой
-  distance_between_robots = std::sqrt(std::pow(estimateCurrentArucoCameraPose.pose.position.x, 2) + 
-                                      std::pow(estimateCurrentArucoCameraPose.pose.position.y, 2) + 
-                                      std::pow(estimateCurrentArucoCameraPose.pose.position.z, 2));
+  // расстояние между маркером и 0 точкой
+  distance_between_robots = std::sqrt(std::pow(estCrntCamZrPntPose.pose.position.x, 2) + 
+                                      std::pow(estCrntCamZrPntPose.pose.position.y, 2) + 
+                                      std::pow(estCrntCamZrPntPose.pose.position.z, 2));
   ROS_INFO("\ndistance_between_robots = %.5f\n", distance_between_robots);
   go_turtle_front();
   go_turtle_back();
@@ -236,53 +90,34 @@ void go_to_goal(){
 
 int main(int argc, char **argv) {
 
-  ros::init(argc, argv, "vdrk_move");
-
+  ros::init(argc, argv, "vdrk_move_line");
   ros::NodeHandle node;
-  tf::TransformListener listener;
-
-  // ros::param::param<double>("~Goal_x", goal_x, 0);
-  // ros::param::param<double>("~Goal_y", goal_y, 0);
-  // ros::param::param<double>("~Goal_z", goal_z, 0);
-  ros::param::param<double>("~Move_precision", move_precision, 0);
   ros::param::param<double>("~Velocity", velocity, 0);
 
   setup();
 
-  // ros::Subscriber currentTurtleFrontOdomPoseSub =                                            // тек позиция переднего робота
-  //   node.subscribe("/gazebo/model_states", 0, getCurrentTurtleFrontOdomPose);
-
-  ros::Subscriber arucoCameraPoseSub =
-    node.subscribe("/aruco_single/pose", 0, getEstimateCurrentArucoCameraPose);                 // тек оценка маркера относительно камеры
+  ros::Subscriber crntEstZrPntPoseSub =                                             
+    node.subscribe("/aruco_single/pose", 0, getCrntEstZrPntPose);   // текущее оценочное положение относительно 0 точки
 
   velCmd2TurtleBack =
-    node.advertise<geometry_msgs::Twist>("/camera_cmd_vel", 0);                                 // скорость для заднего робота
+    node.advertise<geometry_msgs::Twist>("/camera_cmd_vel", 0);      // скорость для заднего робота
 
   velCmd2TurtleFront =
-    node.advertise<geometry_msgs::Twist>("/aruco_cmd_vel", 0);                                  // скорость для переднего робота
+    node.advertise<geometry_msgs::Twist>("/aruco_cmd_vel", 0);       // скорость для переднего робота
 
   ros::Rate loop_rate(30);
 
-  while (ros::ok()/* && (!goal_x_reached || !goal_y_reached || !goal_z_reached)*/) {
+  while (ros::ok()) {
 
     ros::spinOnce();
 
-    allCallbacksCall = getEstimateCurrentArucoCameraPoseCallback &&
-                          getCurrentTurtleFrontOdomPoseCallback;
+    if (!getPoseEstZrPnt) continue;
+    getPoseEstZrPnt = false;
 
-    if (!getEstimateCurrentArucoCameraPoseCallback) continue;
-    getEstimateCurrentArucoCameraPoseCallback = false;
-    getCurrentTurtleFrontOdomPoseCallback     = false;
-
-    go_to_goal();
+    go_vdrk_in_line();
 
     loop_rate.sleep();
   }
-
-  ROS_INFO("\n"
-          "goal_x has been reached!\n"
-          "goal_y has been reached!\n"
-          "goal_z has been reached!\n");
 
   return 0;
 }

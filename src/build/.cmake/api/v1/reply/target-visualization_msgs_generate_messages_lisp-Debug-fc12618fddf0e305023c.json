@@ -1,0 +1,58 @@
+{
+	"backtrace" : 5,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"find_package"
+		],
+		"files" : 
+		[
+			"/opt/ros/noetic/share/visualization_msgs/cmake/visualization_msgsConfig.cmake",
+			"/opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake",
+			"aruco_ros/aruco_ros/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 1,
+				"file" : 2,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"file" : 1,
+				"parent" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 76,
+				"parent" : 2
+			},
+			{
+				"file" : 0,
+				"parent" : 3
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 184,
+				"parent" : 4
+			}
+		]
+	},
+	"id" : "visualization_msgs_generate_messages_lisp::@14a364570629ea9f2448",
+	"name" : "visualization_msgs_generate_messages_lisp",
+	"paths" : 
+	{
+		"build" : "aruco_ros/aruco_ros",
+		"source" : "aruco_ros/aruco_ros"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

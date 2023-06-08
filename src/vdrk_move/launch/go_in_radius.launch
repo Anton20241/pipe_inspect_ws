@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>  
+<?xml version="1.0" encoding="UTF-8"?>
 <launch>
-
-    <arg name="velocity" default="0.056"/>
-    <arg name="radius_tube"    default="250"/>
+    <arg name="move_precision"      default="0.01"/>
+    <arg name="velocity"            default="0.056"/>
+    <arg name="radius_tube"         default="1.5"/>
     
-    <node pkg="marker_move" type="go_in_circle" name="go_in_circle" output="screen">
-
-    	<param name="Velocity" value="$(arg velocity)"/>
-    	<param name="Radius_tube"    value="$(arg radius_tube)"/>
+    <node pkg="vdrk_move" type="go_in_radius" name="go_in_radius" output="screen">
+      <param name="Move_precision"    value="$(arg move_precision)"/>
+    	<param name="Velocity"          value="$(arg velocity)"/>
+    	<param name="Radius_tube"       value="$(arg radius_tube)"/>
     </node>
 
   </launch> 

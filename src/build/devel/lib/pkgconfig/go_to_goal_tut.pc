@@ -1,0 +1,8 @@
+prefix=/home/anton20241/pipe_inspect_ws/src/build/devel
+
+Name: go_to_goal_tut
+Description: Description of go_to_goal_tut
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

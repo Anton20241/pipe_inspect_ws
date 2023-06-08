@@ -70,7 +70,7 @@ int main(int argc, char **argv) {
   arucoResData.open("arucoPoses.bag",   rosbag::bagmode::Write);
   cameraResData.open("cameraPoses.bag", rosbag::bagmode::Write);
 
-  ros::Subscriber arucoPosesSub   = n.subscribe("arucoPosesTopic", 0, arucoPosesHandler);
+  ros::Subscriber arucoPosesSub   = n.subscribe("arucoPosesTopic",  0, arucoPosesHandler);
   ros::Subscriber cameraPosesSub  = n.subscribe("cameraPosesTopic", 0, cameraPosesHandler);
 
   ros::spin();

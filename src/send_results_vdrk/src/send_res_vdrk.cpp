@@ -95,7 +95,6 @@ void getCrntFactOdomPose(const gazebo_msgs::ModelStates& arucoGazeboMsg) {
   crntArOdomPose.pose.position.x     = arucoGazeboMsg.pose[1].position.x;
   crntArOdomPose.pose.position.y     = arucoGazeboMsg.pose[1].position.y;
   crntArOdomPose.pose.position.z     = arucoGazeboMsg.pose[1].position.z;
-
   crntArOdomPose.pose.orientation.w  = arucoGazeboMsg.pose[1].orientation.w;
   crntArOdomPose.pose.orientation.x  = arucoGazeboMsg.pose[1].orientation.x;
   crntArOdomPose.pose.orientation.y  = arucoGazeboMsg.pose[1].orientation.y;
@@ -104,7 +103,6 @@ void getCrntFactOdomPose(const gazebo_msgs::ModelStates& arucoGazeboMsg) {
   crntCamOdomPose.pose.position.x    = arucoGazeboMsg.pose[2].position.x;
   crntCamOdomPose.pose.position.y    = arucoGazeboMsg.pose[2].position.y;
   crntCamOdomPose.pose.position.z    = arucoGazeboMsg.pose[2].position.z;
-
   crntCamOdomPose.pose.orientation.w = arucoGazeboMsg.pose[2].orientation.w;
   crntCamOdomPose.pose.orientation.x = arucoGazeboMsg.pose[2].orientation.x;
   crntCamOdomPose.pose.orientation.y = arucoGazeboMsg.pose[2].orientation.y;
@@ -116,8 +114,6 @@ void getCrntFactOdomPose(const gazebo_msgs::ModelStates& arucoGazeboMsg) {
 // получаем текущее фактическое положение _маркера_ относительно 0 точки И
 // получаем текущее фактическое положение _камеры_  относительно 0 точки
 void getCrntFactZrPntPose(const tf::TransformListener& listener){
-  if(!getPoseFactOdom) return;
-  if(!getPoseEstZrPnt) return;
 
   try{
     crntArOdomPose.header.frame_id  = "odom";
@@ -137,9 +133,11 @@ void getCrntFactZrPntPose(const tf::TransformListener& listener){
 }
 
 // оценочное перемещение _маркера_ относительно ГСК
-void getEstCrntArOdomPose(){
+void getEstCrntArOdomPose(const tf::TransformListener& listener){
 
-  if (!isStop(velCamera)) return;
+  if (!isStop(velCamera)){
+    return;
+  }
 
   geometry_msgs::PoseStamped delta_XYZ_estimateZrPnt;                     // оценочное перемещение _маркера_ относительно 0 точки
   geometry_msgs::PoseStamped delta_XYZ_estimateOdom;                      // оценочное перемещение _маркера_ относительно ГСК
@@ -160,7 +158,7 @@ void getEstCrntArOdomPose(){
     delta_XYZ_estimateOdom.pose.position.y   = ( 1) * delta_XYZ_estimateZrPnt.pose.position.z;
     delta_XYZ_estimateOdom.pose.position.z   = (-1) * delta_XYZ_estimateZrPnt.pose.position.y;
 
-    //listener.transformPose("odom", delta_XYZ_estimateCam, delta_XYZ_estimateOdom);
+    // listener.transformPose("odom", delta_XYZ_estimateZrPnt, delta_XYZ_estimateOdom);
   }
   catch (tf::TransformException &ex) {
     ROS_ERROR("%s",ex.what());
@@ -174,10 +172,12 @@ void getEstCrntArOdomPose(){
 }
 
 // оценочное перемещение _камеры_ относительно ГСК
-void getEstCrntCamOdomPose(){
+void getEstCrntCamOdomPose(const tf::TransformListener& listener){
 
-  if (isStop(velCamera)) return;
-
+  if (isStop(velCamera)){
+    return;
+  }
+  
   geometry_msgs::PoseStamped delta_XYZ_estimateZrPnt;                     // оценочное перемещение _камеры_ относительно 0 точки
   geometry_msgs::PoseStamped delta_XYZ_estimateOdom;                      // оценочное перемещение _камеры_ относительно ГСК
   
@@ -197,7 +197,7 @@ void getEstCrntCamOdomPose(){
     delta_XYZ_estimateOdom.pose.position.y   = ( 1) * delta_XYZ_estimateZrPnt.pose.position.z;
     delta_XYZ_estimateOdom.pose.position.z   = (-1) * delta_XYZ_estimateZrPnt.pose.position.y;
 
-    //listener.transformPose("odom", delta_XYZ_estimateCam, delta_XYZ_estimateOdom);
+    // listener.transformPose("odom", delta_XYZ_estimateZrPnt, delta_XYZ_estimateOdom);
   }
   catch (tf::TransformException &ex) {
     ROS_ERROR("%s",ex.what());
@@ -213,27 +213,25 @@ void getEstCrntCamOdomPose(){
 // получаем текущее оценочное положение _маркера_ относительно ГСК И
 // получаем текущее оценочное положение _камеры_  относительно ГСК
 void getCrntEstOdomPose(const tf::TransformListener& listener){
-  if(!getPoseFactOdom) return;
-  if(!getPoseEstZrPnt) return;
 
   if (start){
     start = false;
-    // estCrntArOdomPose   = crntArOdomPose;        // текущее оц пол-е _маркера_ отн ГСК = текущее факт пол-е _маркера_ отн ГСК
-    // estCrntCamOdomPose  = crntCamOdomPose;       // текущее оц пол-е _камеры_  отн ГСК = текущее факт пол-е _камеры_  отн ГСК
-    estCrntArOdomPose.pose.orientation.w = 1;
-    estCrntArOdomPose.pose.orientation.x = 0;
-    estCrntArOdomPose.pose.orientation.y = 0;
-    estCrntArOdomPose.pose.orientation.z = 0;
-    estCrntArOdomPose.pose.position.x    = 0;
-    estCrntArOdomPose.pose.position.y    = 0;
-    estCrntArOdomPose.pose.position.z    = 0;
-    estCrntCamOdomPose = estCrntArOdomPose;
+    estCrntArOdomPose   = crntArOdomPose;        // текущее оц пол-е _маркера_ отн ГСК = текущее факт пол-е _маркера_ отн ГСК
+    estCrntCamOdomPose  = crntCamOdomPose;       // текущее оц пол-е _камеры_  отн ГСК = текущее факт пол-е _камеры_  отн ГСК
+    // estCrntArOdomPose.pose.orientation.w = 1;
+    // estCrntArOdomPose.pose.orientation.x = 0;
+    // estCrntArOdomPose.pose.orientation.y = 0;
+    // estCrntArOdomPose.pose.orientation.z = 0;
+    // estCrntArOdomPose.pose.position.x    = 0;
+    // estCrntArOdomPose.pose.position.y    = 0;
+    // estCrntArOdomPose.pose.position.z    = 0;
+    // estCrntCamOdomPose = estCrntArOdomPose;
     getPoseEstOdom     = true;
     return;
   }
 
-  getEstCrntArOdomPose();
-  getEstCrntCamOdomPose();
+  getEstCrntArOdomPose(listener);
+  getEstCrntCamOdomPose(listener);
 
   getPoseEstOdom = true;
 
@@ -241,9 +239,9 @@ void getCrntEstOdomPose(const tf::TransformListener& listener){
 
 void showPoses(){
 
-  if (!isStop(velMarker)) printf("\n-------------------------ЕДЕТ МАРКЕР-------------------\n");
+  if      (!isStop(velMarker)) printf("\n-------------------------ЕДЕТ МАРКЕР-------------------\n");
   else if (!isStop(velCamera)) printf("\n-------------------------ЕДЕТ КАМЕРА-------------------\n");
-  else printf("\n-------------------------ВСЕ СТОИТ-------------------\n");
+  else                         printf("\n--------------------------ВСЕ СТОИТ--------------------\n");
 
   printf("######################################################\n");
   printf("[текущее оценочное положение _маркера_ относительно 0 точки]\n");
@@ -385,6 +383,10 @@ int main(int argc, char **argv){
   while (ros::ok()){
 
     ros::spinOnce();
+
+    if (!getPoseEstZrPnt) continue;
+    if (!getPoseFactOdom) continue;
+
     
     // текущее фактическое положение относительно 0 точки
     getCrntFactZrPntPose(listener);

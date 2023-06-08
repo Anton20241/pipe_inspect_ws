@@ -1,0 +1,8 @@
+prefix=/home/anton20241/pipe_inspect_ws/src/build/devel
+
+Name: marker_move
+Description: Description of marker_move
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

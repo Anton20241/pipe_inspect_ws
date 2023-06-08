@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <sdf version="1.5">
   <model name="aruco_visual_marker_26">
-  <pose>0 0 0.25 0 0 0</pose>
+  <pose>0.48 1.09982 0.25 0 0 -0.83601271</pose>
     <link name="aruco_link_base">
           
       <visual name="visual">
@@ -23,7 +23,7 @@
       <collision name="collision">
         <geometry>
           <box>
-            <size>0.5 0.5 0.5</size>
+            <size>1 0.5 0.5</size>
           </box>
         </geometry>
       </collision>

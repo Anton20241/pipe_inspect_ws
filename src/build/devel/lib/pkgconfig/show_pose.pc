@@ -1,0 +1,8 @@
+prefix=/home/anton20241/pipe_inspect_ws/src/build/devel
+
+Name: show_pose
+Description: Description of show_pose
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

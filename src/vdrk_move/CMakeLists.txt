@@ -133,11 +133,9 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 
-add_executable(broadcaster src/broadcaster.cpp)
-target_link_libraries(broadcaster ${catkin_LIBRARIES})
-
- add_executable(go_in_line src/go_in_line.cpp)
- add_executable(go_in_radius src/go_in_radius.cpp)
+add_executable(broadcaster  src/broadcaster.cpp)
+add_executable(go_in_line   src/go_in_line.cpp)
+add_executable(go_in_radius src/go_in_radius.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -151,11 +149,15 @@ target_link_libraries(broadcaster ${catkin_LIBRARIES})
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(go_in_line
-   ${catkin_LIBRARIES}
+    ${catkin_LIBRARIES}
  )
 
  target_link_libraries(go_in_radius
-   ${catkin_LIBRARIES}
+    ${catkin_LIBRARIES}
+ )
+
+ target_link_libraries(broadcaster
+    ${catkin_LIBRARIES}
  )
 
 # target_link_libraries(teleport
