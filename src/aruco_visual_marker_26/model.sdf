@@ -2,7 +2,7 @@
 <sdf version="1.5">
   <model name="aruco_visual_marker_26">
   <!-- <pose>-1 2 0.25 0 0 0.6</pose> -->
-    <pose>0 3 0.25 0 0 0</pose> <!-- <pose>  </pose> -->  <!-- <pose>0.36725 1.43828 0.25 0 0 -0.5</pose> -->
+    <pose>0.36725 1.43828 0.25 0 0 -0.5</pose> <!-- <pose> 0 3 0.25 0 0 0 </pose> -->  <!-- <pose></pose> -->
     <static>false</static>
 
     <link name="aruco_link_base">

@@ -27,7 +27,6 @@ double estCrntRobotsDist      = 0;                                // оцено�
 bool camera_is_stop           = true;
 bool marker_is_stop           = true;
 bool getEstCrntArCamPose      = false;
-bool vdrkStateIsChanged       = false;                            // поменялось состояние ВРДК
 
 void setStopVdrk(){
   velVdrkMsg.linear.x  = 0.0;
@@ -44,13 +43,11 @@ void marker_go(){
     velVdrkMsg.angular.z = (-1.0) * vel4VdrkFromUser / radiusTubeFromUser;
     velCmdArPub.publish(velVdrkMsg);
     marker_is_stop       = false;
-    vdrkStateIsChanged   = false;
   } else {
     setStopVdrk();
     velCmdArPub.publish(velVdrkMsg);
     marker_is_stop       = true;
-    if (!vdrkStateIsChanged && camera_is_stop){
-      vdrkStateIsChanged = true;
+    if (marker_is_stop && camera_is_stop){
       std::this_thread::sleep_for(std::chrono::seconds(2));
     }
   }
@@ -62,13 +59,11 @@ void camera_go(){
     velVdrkMsg.angular.z = (-1.0) * vel4VdrkFromUser / radiusTubeFromUser;
     velCmdCamPub.publish(velVdrkMsg);
     camera_is_stop       = false;
-    vdrkStateIsChanged   = false;
   } else {
     setStopVdrk();
     velCmdCamPub.publish(velVdrkMsg);
     camera_is_stop       = true;
-    if (!vdrkStateIsChanged && marker_is_stop){
-      vdrkStateIsChanged = true;
+    if (marker_is_stop && camera_is_stop){
       std::this_thread::sleep_for(std::chrono::seconds(2));
     }
   }
