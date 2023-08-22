@@ -178,14 +178,24 @@ void sendEstCamLinkOpt2EstCamLinkBaseTransform(){
   ROS_INFO("est_camera_link_optical_inverse -> est_camera_link_base_inverse");
 }
 
+void setPoseFromTransform(geometry_msgs::PoseStamped &pose, tf::StampedTransform &transform){
+  pose.pose.position.x    = transform.getOrigin().x();
+  pose.pose.position.y    = transform.getOrigin().y();
+  pose.pose.position.z    = transform.getOrigin().z();
+  pose.pose.orientation.x = transform.getRotation().x();
+  pose.pose.orientation.y = transform.getRotation().y();
+  pose.pose.orientation.z = transform.getRotation().z();
+  pose.pose.orientation.w = transform.getRotation().w();
+}
+
 // едет маркер
 // получаем текущее оценочное положение _маркера_ относительно ГСК
 // odom -> est_camera_link_base -> est_camera_link_optical -> est_aruco_link_base -> odom
 void getEstCrntArOdomPose(const tf::TransformListener& listener){
-  if (isStop(velCrntAr)) return;
   sendOdom2EstCamLinkBaseTransform();
   sendEstCamLinkBase2EstCamLinkOptTransform();
   sendEstCamLinkOpt2EstArLinkBaseTransform();
+  if (isStop(velCrntAr)) return;
   tf::StampedTransform transform;
   try{
     listener.lookupTransform("odom", "est_aruco_link_base_direct", ros::Time(0), transform);
@@ -194,23 +204,17 @@ void getEstCrntArOdomPose(const tf::TransformListener& listener){
     ROS_ERROR("%s",ex.what());
     ros::Duration(1.0).sleep();
   }
-  estCrntArOdomPose.pose.position.x    = transform.getOrigin().x();
-  estCrntArOdomPose.pose.position.y    = transform.getOrigin().y();
-  estCrntArOdomPose.pose.position.z    = transform.getOrigin().z();
-  estCrntArOdomPose.pose.orientation.x = transform.getRotation().x();
-  estCrntArOdomPose.pose.orientation.y = transform.getRotation().y();
-  estCrntArOdomPose.pose.orientation.z = transform.getRotation().z();
-  estCrntArOdomPose.pose.orientation.w = transform.getRotation().w();
+  setPoseFromTransform(estCrntArOdomPose, transform);
 }
 
 // едет камера
 // получаем текущее оценочное положение _камеры_ относительно ГСК
 // odom -> est_aruco_link_base -> est_camera_link_optical -> est_camera_link_base -> odom
 void getEstCrntCamOdomPose(const tf::TransformListener& listener){
-  if (isStop(velCrntCam)) return;
   sendOdom2EstArLinkBaseTransform();
   sendEstArLinkBase2EstCamLinkOptTransform();
   sendEstCamLinkOpt2EstCamLinkBaseTransform();
+  if (isStop(velCrntCam)) return;
   tf::StampedTransform transform;
   try{
     listener.lookupTransform("odom", "est_camera_link_base_inverse", ros::Time(0), transform);
@@ -219,13 +223,7 @@ void getEstCrntCamOdomPose(const tf::TransformListener& listener){
     ROS_ERROR("%s",ex.what());
     ros::Duration(1.0).sleep();
   }
-  estCrntCamOdomPose.pose.position.x    = transform.getOrigin().x();
-  estCrntCamOdomPose.pose.position.y    = transform.getOrigin().y();
-  estCrntCamOdomPose.pose.position.z    = transform.getOrigin().z();
-  estCrntCamOdomPose.pose.orientation.x = transform.getRotation().x();
-  estCrntCamOdomPose.pose.orientation.y = transform.getRotation().y();
-  estCrntCamOdomPose.pose.orientation.z = transform.getRotation().z();
-  estCrntCamOdomPose.pose.orientation.w = transform.getRotation().w();
+  setPoseFromTransform(estCrntCamOdomPose, transform);
 }
 
 // отображение текущих положений _маркера_ и _камеры_ 
