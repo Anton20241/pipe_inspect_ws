@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
   "../devel/share/roseus/ros/send_results_vdrk/manifest.l"
-  "../devel/share/roseus/ros/send_results_vdrk/msg/Poses4.l"
+  "../devel/share/roseus/ros/send_results_vdrk/msg/VdrkPose.l"
   "CMakeFiles/send_results_vdrk_generate_messages_eus"
 )
 

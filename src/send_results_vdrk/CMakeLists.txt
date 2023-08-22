@@ -54,7 +54,7 @@ find_package(catkin REQUIRED COMPONENTS
 # Generate messages in the 'msg' folder
  add_message_files(
    FILES
-   Poses4.msg
+   VdrkPose.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -157,11 +157,11 @@ include_directories(
 add_executable(cam_frame_broadcaster src/cam_frame_broadcaster.cpp)
 target_link_libraries(cam_frame_broadcaster ${catkin_LIBRARIES})
 
-add_executable(send_res_vdrk src/send_res_vdrk.cpp)
-target_link_libraries(send_res_vdrk ${catkin_LIBRARIES})
+add_executable(vdrk_pose_pub src/vdrk_pose_pub.cpp)
+target_link_libraries(vdrk_pose_pub ${catkin_LIBRARIES})
 
-add_executable(res_catch2_write src/res_catch2_write.cpp)
-target_link_libraries(res_catch2_write ${catkin_LIBRARIES})
+add_executable(vdrk_pose_sub src/vdrk_pose_sub.cpp)
+target_link_libraries(vdrk_pose_sub ${catkin_LIBRARIES})
 
 #############
 ## Install ##

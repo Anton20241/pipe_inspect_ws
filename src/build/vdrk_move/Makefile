@@ -56,18 +56,6 @@ CMAKE_BINARY_DIR = /home/anton20241/pipe_inspect_ws/src/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local/fast
-
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -135,6 +123,18 @@ install/strip/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
 # The main all target
 all: cmake_check_build_system
 	cd /home/anton20241/pipe_inspect_ws/src/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/anton20241/pipe_inspect_ws/src/build/CMakeFiles /home/anton20241/pipe_inspect_ws/src/build/vdrk_move/CMakeFiles/progress.marks
@@ -183,88 +183,88 @@ go_in_radius/fast:
 .PHONY : go_in_radius/fast
 
 # Convenience name for target.
-vdrk_move/CMakeFiles/go_in_line.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 vdrk_move/CMakeFiles/go_in_line.dir/rule
-.PHONY : vdrk_move/CMakeFiles/go_in_line.dir/rule
+vdrk_move/CMakeFiles/est_go_in_radius.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 vdrk_move/CMakeFiles/est_go_in_radius.dir/rule
+.PHONY : vdrk_move/CMakeFiles/est_go_in_radius.dir/rule
 
 # Convenience name for target.
-go_in_line: vdrk_move/CMakeFiles/go_in_line.dir/rule
+est_go_in_radius: vdrk_move/CMakeFiles/est_go_in_radius.dir/rule
 
-.PHONY : go_in_line
+.PHONY : est_go_in_radius
 
 # fast build rule for target.
-go_in_line/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/go_in_line.dir/build.make vdrk_move/CMakeFiles/go_in_line.dir/build
-.PHONY : go_in_line/fast
+est_go_in_radius/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/est_go_in_radius.dir/build.make vdrk_move/CMakeFiles/est_go_in_radius.dir/build
+.PHONY : est_go_in_radius/fast
 
 # Convenience name for target.
-vdrk_move/CMakeFiles/broadcaster.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 vdrk_move/CMakeFiles/broadcaster.dir/rule
-.PHONY : vdrk_move/CMakeFiles/broadcaster.dir/rule
+vdrk_move/CMakeFiles/est_go_in_line.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 vdrk_move/CMakeFiles/est_go_in_line.dir/rule
+.PHONY : vdrk_move/CMakeFiles/est_go_in_line.dir/rule
 
 # Convenience name for target.
-broadcaster: vdrk_move/CMakeFiles/broadcaster.dir/rule
+est_go_in_line: vdrk_move/CMakeFiles/est_go_in_line.dir/rule
 
-.PHONY : broadcaster
+.PHONY : est_go_in_line
 
 # fast build rule for target.
-broadcaster/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/broadcaster.dir/build.make vdrk_move/CMakeFiles/broadcaster.dir/build
-.PHONY : broadcaster/fast
+est_go_in_line/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/est_go_in_line.dir/build.make vdrk_move/CMakeFiles/est_go_in_line.dir/build
+.PHONY : est_go_in_line/fast
 
-src/broadcaster.o: src/broadcaster.cpp.o
+src/est_go_in_line.o: src/est_go_in_line.cpp.o
 
-.PHONY : src/broadcaster.o
-
-# target to build an object file
-src/broadcaster.cpp.o:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/broadcaster.dir/build.make vdrk_move/CMakeFiles/broadcaster.dir/src/broadcaster.cpp.o
-.PHONY : src/broadcaster.cpp.o
-
-src/broadcaster.i: src/broadcaster.cpp.i
-
-.PHONY : src/broadcaster.i
-
-# target to preprocess a source file
-src/broadcaster.cpp.i:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/broadcaster.dir/build.make vdrk_move/CMakeFiles/broadcaster.dir/src/broadcaster.cpp.i
-.PHONY : src/broadcaster.cpp.i
-
-src/broadcaster.s: src/broadcaster.cpp.s
-
-.PHONY : src/broadcaster.s
-
-# target to generate assembly for a file
-src/broadcaster.cpp.s:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/broadcaster.dir/build.make vdrk_move/CMakeFiles/broadcaster.dir/src/broadcaster.cpp.s
-.PHONY : src/broadcaster.cpp.s
-
-src/go_in_line.o: src/go_in_line.cpp.o
-
-.PHONY : src/go_in_line.o
+.PHONY : src/est_go_in_line.o
 
 # target to build an object file
-src/go_in_line.cpp.o:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/go_in_line.dir/build.make vdrk_move/CMakeFiles/go_in_line.dir/src/go_in_line.cpp.o
-.PHONY : src/go_in_line.cpp.o
+src/est_go_in_line.cpp.o:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/est_go_in_line.dir/build.make vdrk_move/CMakeFiles/est_go_in_line.dir/src/est_go_in_line.cpp.o
+.PHONY : src/est_go_in_line.cpp.o
 
-src/go_in_line.i: src/go_in_line.cpp.i
+src/est_go_in_line.i: src/est_go_in_line.cpp.i
 
-.PHONY : src/go_in_line.i
+.PHONY : src/est_go_in_line.i
 
 # target to preprocess a source file
-src/go_in_line.cpp.i:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/go_in_line.dir/build.make vdrk_move/CMakeFiles/go_in_line.dir/src/go_in_line.cpp.i
-.PHONY : src/go_in_line.cpp.i
+src/est_go_in_line.cpp.i:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/est_go_in_line.dir/build.make vdrk_move/CMakeFiles/est_go_in_line.dir/src/est_go_in_line.cpp.i
+.PHONY : src/est_go_in_line.cpp.i
 
-src/go_in_line.s: src/go_in_line.cpp.s
+src/est_go_in_line.s: src/est_go_in_line.cpp.s
 
-.PHONY : src/go_in_line.s
+.PHONY : src/est_go_in_line.s
 
 # target to generate assembly for a file
-src/go_in_line.cpp.s:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/go_in_line.dir/build.make vdrk_move/CMakeFiles/go_in_line.dir/src/go_in_line.cpp.s
-.PHONY : src/go_in_line.cpp.s
+src/est_go_in_line.cpp.s:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/est_go_in_line.dir/build.make vdrk_move/CMakeFiles/est_go_in_line.dir/src/est_go_in_line.cpp.s
+.PHONY : src/est_go_in_line.cpp.s
+
+src/est_go_in_radius.o: src/est_go_in_radius.cpp.o
+
+.PHONY : src/est_go_in_radius.o
+
+# target to build an object file
+src/est_go_in_radius.cpp.o:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/est_go_in_radius.dir/build.make vdrk_move/CMakeFiles/est_go_in_radius.dir/src/est_go_in_radius.cpp.o
+.PHONY : src/est_go_in_radius.cpp.o
+
+src/est_go_in_radius.i: src/est_go_in_radius.cpp.i
+
+.PHONY : src/est_go_in_radius.i
+
+# target to preprocess a source file
+src/est_go_in_radius.cpp.i:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/est_go_in_radius.dir/build.make vdrk_move/CMakeFiles/est_go_in_radius.dir/src/est_go_in_radius.cpp.i
+.PHONY : src/est_go_in_radius.cpp.i
+
+src/est_go_in_radius.s: src/est_go_in_radius.cpp.s
+
+.PHONY : src/est_go_in_radius.s
+
+# target to generate assembly for a file
+src/est_go_in_radius.cpp.s:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f vdrk_move/CMakeFiles/est_go_in_radius.dir/build.make vdrk_move/CMakeFiles/est_go_in_radius.dir/src/est_go_in_radius.cpp.s
+.PHONY : src/est_go_in_radius.cpp.s
 
 src/go_in_radius.o: src/go_in_radius.cpp.o
 
@@ -299,7 +299,6 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/local"
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
@@ -307,14 +306,15 @@ help:
 	@echo "... test"
 	@echo "... install/strip"
 	@echo "... go_in_radius"
-	@echo "... go_in_line"
-	@echo "... broadcaster"
-	@echo "... src/broadcaster.o"
-	@echo "... src/broadcaster.i"
-	@echo "... src/broadcaster.s"
-	@echo "... src/go_in_line.o"
-	@echo "... src/go_in_line.i"
-	@echo "... src/go_in_line.s"
+	@echo "... est_go_in_radius"
+	@echo "... install/local"
+	@echo "... est_go_in_line"
+	@echo "... src/est_go_in_line.o"
+	@echo "... src/est_go_in_line.i"
+	@echo "... src/est_go_in_line.s"
+	@echo "... src/est_go_in_radius.o"
+	@echo "... src/est_go_in_radius.i"
+	@echo "... src/est_go_in_radius.s"
 	@echo "... src/go_in_radius.o"
 	@echo "... src/go_in_radius.i"
 	@echo "... src/go_in_radius.s"

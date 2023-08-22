@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "../devel/include/send_results_vdrk/Poses4.h"
+  "../devel/include/send_results_vdrk/VdrkPose.h"
   "CMakeFiles/send_results_vdrk_generate_messages_cpp"
 )
 

@@ -1,7 +1,0 @@
-каждые 5 см 
-
-  <model name="camera">
-  <pose>0 -0.8 0.1 0 0 0</pose>
-  
-  #define MIN_ROBOTS_DIST 0.8                                       // минимальное  расстояние между turtle_front & turtle_back
-#define MAX_ROBOTS_DIST 1.4    

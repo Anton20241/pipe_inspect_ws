@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "../devel/share/common-lisp/ros/send_results_vdrk/msg/Poses4.lisp"
+  "../devel/share/common-lisp/ros/send_results_vdrk/msg/VdrkPose.lisp"
   "CMakeFiles/send_results_vdrk_generate_messages_lisp"
 )
 

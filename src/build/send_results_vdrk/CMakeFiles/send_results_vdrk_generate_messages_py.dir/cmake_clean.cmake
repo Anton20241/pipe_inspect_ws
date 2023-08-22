@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "../devel/lib/python3/dist-packages/send_results_vdrk/msg/_Poses4.py"
+  "../devel/lib/python3/dist-packages/send_results_vdrk/msg/_VdrkPose.py"
   "../devel/lib/python3/dist-packages/send_results_vdrk/msg/__init__.py"
   "CMakeFiles/send_results_vdrk_generate_messages_py"
 )

@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/anton20241/pipe_inspect_ws/src/send_results_vdrk/msg/Poses4.msg"
+messages_str = "/home/anton20241/pipe_inspect_ws/src/send_results_vdrk/msg/VdrkPose.msg"
 services_str = ""
 pkg_name = "send_results_vdrk"
 dependencies_str = "geometry_msgs"

@@ -1,5 +1,5 @@
 /*
-  Программа предназначена для перемещения ВДРК по прямой линии.
+  Программа предназначена для перемещения ВДРК по окружности радиусом radiusTubeFromUser.
   В качестве аргументов - скорость перемещения роботов.
   Зная расстояние от маркера до камеры, 
   сперва перемещается передний робот до заданного расстояния между роботами,
@@ -9,210 +9,150 @@
 #include <ros/ros.h>
 #include <tf/transform_listener.h>
 #include <gazebo_msgs/ModelStates.h>
+#include <boost/asio.hpp>
 
-#define MIN_ROBOTS_DIST 0.8                                       // минимальное  расстояние между turtle_front & turtle_back
-#define MAX_ROBOTS_DIST 1.1                                       // максимальное расстояние между turtle_front & turtle_back
+#define MIN_ROBOTS_DIST       1.48442                             // минимальное  расстояние между камерой и маркером   [м]
+#define MAX_ROBOTS_DIST       1.77312                             // максимальное расстояние между камерой и маркером   [м]
+#define ROBOTS_DIST_PRECISION 0.00001                             // точность оценочного взаимного расположения роботов [м]
 
-geometry_msgs::PoseStamped estimateCurrentArucoCameraPose;        // текущее оц. положение маркера относительно камеры
-geometry_msgs::PoseStamped startCurrentTurtleFrontOdomPose;       // начальное   положение маркера относительно ГСК
-geometry_msgs::PoseStamped currentTurtleFrontOdomPose;            // текущее     положение маркера относительно ГСК
-geometry_msgs::PoseStamped currentTurtleBackOdomPose;             // текущее     положение камеры  относительно ГСК
+geometry_msgs::PoseStamped crntArOdomPose;                        // текущее   фактическое положение _маркера_ относительно ГСК     
+geometry_msgs::PoseStamped crntCamOdomPose;                       // текущее   фактическое положение _камеры_  относительно ГСК  
+geometry_msgs::Twist       velVdrkMsg;                            // сообщение скорости для роботов [м/с]
+ros::Publisher             velCmdCamPub;                          // паблишер  скорости для камеры
+ros::Publisher             velCmdArPub;                           // паблишер  скорости для маркера
+ros::Subscriber            crntOdomPoseSub;
 
-geometry_msgs::Twist velCmd2Turtle;                               // скорость для роботов [м/с]
-ros::Publisher velCmd2TurtleBack;                                 // скорость для заднего робота
-ros::Publisher velCmd2TurtleFront;                                // скорость для переднего робота
+double vel4VdrkFromUser       = 0;                                // скорость для роботов от пользователя [м/с]
+double radiusTubeFromUser     = 0;                                // радиус трубы от пользователя [м]
+double lenOfAr2CamOffset      = 0;                                // оценочное расстояние между маркером и камерой [м]
+bool camera_is_stop           = true;
+bool marker_is_stop           = true;
+bool getOdomPoses             = false;                            // получены фактические положения относительно ГСК
 
-double distance_between_robots;                                   // расстояние между маркером и камерой
-
-enum TurtleType{
-  TURTLE_FRONT,
-  TURTLE_BACK
-};
-
-double velocity             = 0;
-double move_precision       = 0;
-double radius_tube          = 0;                                  // [м] - радиус кривизны оси трубы
-
-bool turtle_back_stop       = true;
-bool turtle_front_stop      = true;
-bool turtle_front_start     = true;
-bool turtle_back_start      = true;
-
-bool goal_x_reached         = false;
-bool goal_y_reached         = false;
-
-bool allCallbacksCall                          = false;           // все колбеки вызваны
-bool getEstimateCurrentArucoCameraPoseCallback = false;
-bool getCurrentTurtleFrontOdomPoseCallback     = false;
-bool getCurrentTurtleBackOdomPoseCallback      = false;
-
-void setup() {
-  velCmd2Turtle.linear.x  = 0.0;
-  velCmd2Turtle.linear.y  = 0.0;
-  velCmd2Turtle.linear.z  = 0.0;
-  velCmd2Turtle.angular.x = 0.0;
-  velCmd2Turtle.angular.y = 0.0;
-  velCmd2Turtle.angular.z = 0.0;
+void setStopVdrk(){
+  velVdrkMsg.linear.x  = 0.0;
+  velVdrkMsg.linear.y  = 0.0;
+  velVdrkMsg.linear.z  = 0.0;
+  velVdrkMsg.angular.x = 0.0;
+  velVdrkMsg.angular.y = 0.0;
+  velVdrkMsg.angular.z = 0.0;
 }
 
-void stop_turtle(size_t type){
-  velCmd2Turtle.linear.x  = 0.0;
-  velCmd2Turtle.linear.y  = 0.0;
-  velCmd2Turtle.linear.z  = 0.0;
-  velCmd2Turtle.angular.x = 0.0;
-  velCmd2Turtle.angular.y = 0.0;
-  velCmd2Turtle.angular.z = 0.0;
-
-  if (type == TURTLE_FRONT){
-    velCmd2TurtleFront.publish(velCmd2Turtle);
-    turtle_front_stop = true;
-  }
-
-  if (type == TURTLE_BACK){
-    velCmd2TurtleBack.publish(velCmd2Turtle);
-    turtle_back_stop = true;
-  }
-}
-
-double getDistance(const double desired, const double current) {
-  return desired - current;
-}
-
-void go_turtle_front(){
-
-  // if (turtle_front_start){
-  //   startCurrentTurtleFrontOdomPose = currentTurtleFrontOdomPose;
-  //   turtle_front_start = false;
-  // }
-
-  if ((distance_between_robots <= MAX_ROBOTS_DIST) && turtle_back_stop) {
-    velCmd2Turtle.linear.y  = velocity;
-    velCmd2Turtle.angular.z = (-1.0) * velocity / radius_tube;   // [rad/s] - omega
-    velCmd2TurtleFront.publish(velCmd2Turtle);
-    turtle_front_stop = false;
-
+void marker_go(){
+  if ((ROBOTS_DIST_PRECISION < (MAX_ROBOTS_DIST - lenOfAr2CamOffset)) && camera_is_stop) {
+    velVdrkMsg.linear.y  = vel4VdrkFromUser;
+    velVdrkMsg.angular.z = (-1.0) * vel4VdrkFromUser / radiusTubeFromUser;
+    velCmdArPub.publish(velVdrkMsg);
+    marker_is_stop       = false;
   } else {
-    velCmd2Turtle.linear.y  = 0;
-    velCmd2Turtle.angular.z = 0;
-    velCmd2TurtleFront.publish(velCmd2Turtle);
-    turtle_front_stop = true;
-    
+    setStopVdrk();
+    velCmdArPub.publish(velVdrkMsg);
+    marker_is_stop       = true;
+    std::this_thread::sleep_for(std::chrono::seconds(0));
   }
 }
 
-void go_turtle_back(){
-  
-  // if(turtle_back_start && turtle_front_stop){
-  //   if (!goal_x_reached || !goal_y_reached){
-  //     go_turtle_back_to_start();
-  //     turtle_back_stop  = false;
-  //   } else {
-  //     turtle_back_start = false;
-  //   }
-
-  // } else 
-  
-  if ((distance_between_robots >= MIN_ROBOTS_DIST) && turtle_front_stop) {
-    velCmd2Turtle.linear.y  = velocity;
-    velCmd2Turtle.angular.z = (-1.0) * velocity / radius_tube;   // [rad/s] - omega
-    velCmd2TurtleBack.publish(velCmd2Turtle);
-    turtle_back_stop = false;
-
-  } else {
-    velCmd2Turtle.linear.y  = 0;
-    velCmd2Turtle.angular.z = 0;
-    velCmd2TurtleBack.publish(velCmd2Turtle);
-    turtle_back_stop = true;
+void tryToGetAr2CamTransform(tf::TransformListener& listener, tf::StampedTransform& transform){
+  try{
+    listener.lookupTransform("camera_link_optical", "aruco_link_base",
+                              ros::Time(0), transform);
   }
+  catch (tf::TransformException &ex) {
+    ROS_ERROR("%s",ex.what());
+    ros::Duration(1.0).sleep();
+  }
+}
+
+void camera_go(){
+  if (((lenOfAr2CamOffset - MIN_ROBOTS_DIST) > ROBOTS_DIST_PRECISION) && marker_is_stop) {
+    tf::TransformListener listener;
+    tf::StampedTransform transform;
+    tryToGetAr2CamTransform(listener, transform);
+    velVdrkMsg.linear.y = vel4VdrkFromUser * sqrt(pow(transform.getOrigin().x(), 2) +
+                                                  pow(transform.getOrigin().y(), 2));
+    velVdrkMsg.angular.z = vel4VdrkFromUser * atan2(transform.getOrigin().y(),
+                                                    transform.getOrigin().x());
+    velCmdCamPub.publish(velVdrkMsg);
+    camera_is_stop       = false;
+  } else {
+    setStopVdrk();
+    velCmdCamPub.publish(velVdrkMsg);
+    camera_is_stop       = true;
+    std::this_thread::sleep_for(std::chrono::seconds(0));
+  }
+}
+
+// расстояние между точками
+double getDistance(const double t1, const double t2) {                
+  return t1 - t2;
+}
+
+void findAr2CamOffset(geometry_msgs::Vector3& ar2CamOffset){
+  ar2CamOffset.x = abs(getDistance(crntArOdomPose.pose.position.x, crntCamOdomPose.pose.position.x));
+  ar2CamOffset.y = abs(getDistance(crntArOdomPose.pose.position.y, crntCamOdomPose.pose.position.y));
+  ar2CamOffset.z = abs(getDistance(crntArOdomPose.pose.position.z, crntCamOdomPose.pose.position.z));
+}
+
+void findLenOfAr2CamOffset(){
+  geometry_msgs::Vector3 ar2CamOffset;
+  findAr2CamOffset(ar2CamOffset);
+  lenOfAr2CamOffset = std::sqrt(std::pow(ar2CamOffset.x, 2) +
+                                std::pow(ar2CamOffset.y, 2) +
+                                std::pow(ar2CamOffset.z, 2));
+  ROS_INFO("\nlenOfAr2CamOffset = %.5f\n", lenOfAr2CamOffset);
 }
 
 void go_vdrk_in_radius(){
-
-  // расстояние между маркером и камерой
-  distance_between_robots = std::sqrt(std::pow(estimateCurrentArucoCameraPose.pose.position.x, 2) + 
-                                      std::pow(estimateCurrentArucoCameraPose.pose.position.y, 2) + 
-                                      std::pow(estimateCurrentArucoCameraPose.pose.position.z, 2));
-  ROS_INFO("\ndistance_between_robots = %.5f\n", distance_between_robots);
-  go_turtle_front();
-  go_turtle_back();
+  findLenOfAr2CamOffset();
+  marker_go();
+  camera_go();
 }
 
-// тек оценка маркера относительно камеры
-void getEstimateCurrentArucoCameraPose(const geometry_msgs::PoseStamped& arucoCameraMsg) { 
-  estimateCurrentArucoCameraPose            = arucoCameraMsg;
-  getEstimateCurrentArucoCameraPoseCallback = true;
+// получаем текущее фактическое положение _маркера_ относительно ГСК И
+// получаем текущее фактическое положение _камеры_  относительно ГСК 
+void getCrntOdomPoseHandler(const gazebo_msgs::ModelStates& arucoGazeboMsg) {
+  crntArOdomPose.pose.position.x     = arucoGazeboMsg.pose[1].position.x;
+  crntArOdomPose.pose.position.y     = arucoGazeboMsg.pose[1].position.y;
+  crntArOdomPose.pose.position.z     = arucoGazeboMsg.pose[1].position.z;
+  crntArOdomPose.pose.orientation.w  = arucoGazeboMsg.pose[1].orientation.w;
+  crntArOdomPose.pose.orientation.x  = arucoGazeboMsg.pose[1].orientation.x;
+  crntArOdomPose.pose.orientation.y  = arucoGazeboMsg.pose[1].orientation.y;
+  crntArOdomPose.pose.orientation.z  = arucoGazeboMsg.pose[1].orientation.z;
+  crntCamOdomPose.pose.position.x    = arucoGazeboMsg.pose[2].position.x;
+  crntCamOdomPose.pose.position.y    = arucoGazeboMsg.pose[2].position.y;
+  crntCamOdomPose.pose.position.z    = arucoGazeboMsg.pose[2].position.z;
+  crntCamOdomPose.pose.orientation.w = arucoGazeboMsg.pose[2].orientation.w;
+  crntCamOdomPose.pose.orientation.x = arucoGazeboMsg.pose[2].orientation.x;
+  crntCamOdomPose.pose.orientation.y = arucoGazeboMsg.pose[2].orientation.y;
+  crntCamOdomPose.pose.orientation.z = arucoGazeboMsg.pose[2].orientation.z;
+  getOdomPoses = true;
 }
 
-// тек позиция маркера относительно ГСК
-void getCurrentTurtleFrontOdomPose(const gazebo_msgs::ModelStates& turtleFrontMsg) {
-  currentTurtleFrontOdomPose.pose.position.x    = turtleFrontMsg.pose[1].position.x;
-  currentTurtleFrontOdomPose.pose.position.y    = turtleFrontMsg.pose[1].position.y;
-  currentTurtleFrontOdomPose.pose.position.z    = turtleFrontMsg.pose[1].position.z;
-  currentTurtleFrontOdomPose.pose.orientation.w = turtleFrontMsg.pose[1].orientation.w;
-  currentTurtleFrontOdomPose.pose.orientation.x = turtleFrontMsg.pose[1].orientation.x;
-  currentTurtleFrontOdomPose.pose.orientation.y = turtleFrontMsg.pose[1].orientation.y;
-  currentTurtleFrontOdomPose.pose.orientation.z = turtleFrontMsg.pose[1].orientation.z;
-
-  getCurrentTurtleFrontOdomPoseCallback = true;
-}
-
-// тек позиция камеры относительно ГСК
-void getCurrentTurtleBackOdomPose(const gazebo_msgs::ModelStates& turtleBackMsg) {
-  currentTurtleBackOdomPose.pose.position.x    = turtleBackMsg.pose[2].position.x;
-  currentTurtleBackOdomPose.pose.position.y    = turtleBackMsg.pose[2].position.y;
-  currentTurtleBackOdomPose.pose.position.z    = turtleBackMsg.pose[2].position.z;
-  currentTurtleBackOdomPose.pose.orientation.w = turtleBackMsg.pose[2].orientation.w;
-  currentTurtleBackOdomPose.pose.orientation.x = turtleBackMsg.pose[2].orientation.x;
-  currentTurtleBackOdomPose.pose.orientation.y = turtleBackMsg.pose[2].orientation.y;
-  currentTurtleBackOdomPose.pose.orientation.z = turtleBackMsg.pose[2].orientation.z;
-
-  getCurrentTurtleBackOdomPoseCallback = true;
+void setup(ros::NodeHandle& node) {
+  crntOdomPoseSub      = node.subscribe("/gazebo/model_states",  0, getCrntOdomPoseHandler);
+  velCmdCamPub         = node.advertise<geometry_msgs::Twist>("/camera_cmd_vel", 0);
+  velCmdArPub          = node.advertise<geometry_msgs::Twist>("/aruco_cmd_vel",  0);
+  velVdrkMsg.linear.x  = 0.0;
+  velVdrkMsg.linear.y  = 0.0;
+  velVdrkMsg.linear.z  = 0.0;
+  velVdrkMsg.angular.x = 0.0;
+  velVdrkMsg.angular.y = 0.0;
+  velVdrkMsg.angular.z = 0.0;
 }
 
 int main(int argc, char **argv) {
-
-  ros::init(argc, argv, "vdrk_move_radius");
+  ros::init(argc, argv, "go_in_radius");
   ros::NodeHandle node;
-  ros::param::param<double>("~Move_precision", move_precision, 0);
-  ros::param::param<double>("~Velocity",       velocity,       0);
-  ros::param::param<double>("~Radius_tube",    radius_tube,    0);
-
-  setup();
-
-  ros::Subscriber currentTurtleFrontOdomPoseSub =                                   // тек позиция маркера относительно ГСК
-    node.subscribe("/gazebo/model_states", 0, getCurrentTurtleFrontOdomPose);
-
-  ros::Subscriber currentTurtleBackOdomPoseSub =                                    // тек позиция камеры относительно ГСК
-    node.subscribe("/gazebo/model_states", 0, getCurrentTurtleBackOdomPose);
-
-  ros::Subscriber arucoCameraPoseSub =
-    node.subscribe("/aruco_single/pose", 0, getEstimateCurrentArucoCameraPose);     // тек оценка маркера относительно камеры
-
-  velCmd2TurtleBack =
-    node.advertise<geometry_msgs::Twist>("/camera_cmd_vel", 0);                     // скорость для заднего робота
-
-  velCmd2TurtleFront =
-    node.advertise<geometry_msgs::Twist>("/aruco_cmd_vel", 0);                      // скорость для переднего робота
-
+  ros::param::param<double>("~Velocity",    vel4VdrkFromUser,   0);
+  ros::param::param<double>("~Radius_tube", radiusTubeFromUser, 0);
+  setup(node);
   ros::Rate loop_rate(30);
-
   while (ros::ok()) {
-
     ros::spinOnce();
-
-    allCallbacksCall =  getEstimateCurrentArucoCameraPoseCallback &&
-                        getCurrentTurtleBackOdomPoseCallback      &&
-                        getCurrentTurtleFrontOdomPoseCallback;
-
-    if (!allCallbacksCall) continue;
-    getEstimateCurrentArucoCameraPoseCallback = false;
-    getCurrentTurtleBackOdomPoseCallback      = false;
-    getCurrentTurtleFrontOdomPoseCallback     = false;
-    
+    if (!getOdomPoses) continue;
+    getOdomPoses = false;
     go_vdrk_in_radius();
-
     loop_rate.sleep();
   }
-
   return 0;
 }

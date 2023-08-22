@@ -53,22 +53,22 @@ CMAKE_BINARY_DIR = /home/anton20241/pipe_inspect_ws/src/build
 # Include the progress variables for this target.
 include send_results_vdrk/CMakeFiles/send_results_vdrk_generate_messages_cpp.dir/progress.make
 
-send_results_vdrk/CMakeFiles/send_results_vdrk_generate_messages_cpp: devel/include/send_results_vdrk/Poses4.h
+send_results_vdrk/CMakeFiles/send_results_vdrk_generate_messages_cpp: devel/include/send_results_vdrk/VdrkPose.h
 
 
-devel/include/send_results_vdrk/Poses4.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
-devel/include/send_results_vdrk/Poses4.h: ../send_results_vdrk/msg/Poses4.msg
-devel/include/send_results_vdrk/Poses4.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
-devel/include/send_results_vdrk/Poses4.h: /opt/ros/noetic/share/geometry_msgs/msg/Pose.msg
-devel/include/send_results_vdrk/Poses4.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
-devel/include/send_results_vdrk/Poses4.h: /opt/ros/noetic/share/geometry_msgs/msg/Quaternion.msg
-devel/include/send_results_vdrk/Poses4.h: /opt/ros/noetic/share/geometry_msgs/msg/PoseStamped.msg
-devel/include/send_results_vdrk/Poses4.h: /opt/ros/noetic/share/gencpp/msg.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/anton20241/pipe_inspect_ws/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from send_results_vdrk/Poses4.msg"
-	cd /home/anton20241/pipe_inspect_ws/src/send_results_vdrk && /home/anton20241/pipe_inspect_ws/src/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/anton20241/pipe_inspect_ws/src/send_results_vdrk/msg/Poses4.msg -Isend_results_vdrk:/home/anton20241/pipe_inspect_ws/src/send_results_vdrk/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p send_results_vdrk -o /home/anton20241/pipe_inspect_ws/src/build/devel/include/send_results_vdrk -e /opt/ros/noetic/share/gencpp/cmake/..
+devel/include/send_results_vdrk/VdrkPose.h: /opt/ros/noetic/lib/gencpp/gen_cpp.py
+devel/include/send_results_vdrk/VdrkPose.h: ../send_results_vdrk/msg/VdrkPose.msg
+devel/include/send_results_vdrk/VdrkPose.h: /opt/ros/noetic/share/geometry_msgs/msg/PoseStamped.msg
+devel/include/send_results_vdrk/VdrkPose.h: /opt/ros/noetic/share/geometry_msgs/msg/Point.msg
+devel/include/send_results_vdrk/VdrkPose.h: /opt/ros/noetic/share/geometry_msgs/msg/Quaternion.msg
+devel/include/send_results_vdrk/VdrkPose.h: /opt/ros/noetic/share/geometry_msgs/msg/Pose.msg
+devel/include/send_results_vdrk/VdrkPose.h: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+devel/include/send_results_vdrk/VdrkPose.h: /opt/ros/noetic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/anton20241/pipe_inspect_ws/src/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating C++ code from send_results_vdrk/VdrkPose.msg"
+	cd /home/anton20241/pipe_inspect_ws/src/send_results_vdrk && /home/anton20241/pipe_inspect_ws/src/build/catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/anton20241/pipe_inspect_ws/src/send_results_vdrk/msg/VdrkPose.msg -Isend_results_vdrk:/home/anton20241/pipe_inspect_ws/src/send_results_vdrk/msg -Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p send_results_vdrk -o /home/anton20241/pipe_inspect_ws/src/build/devel/include/send_results_vdrk -e /opt/ros/noetic/share/gencpp/cmake/..
 
 send_results_vdrk_generate_messages_cpp: send_results_vdrk/CMakeFiles/send_results_vdrk_generate_messages_cpp
-send_results_vdrk_generate_messages_cpp: devel/include/send_results_vdrk/Poses4.h
+send_results_vdrk_generate_messages_cpp: devel/include/send_results_vdrk/VdrkPose.h
 send_results_vdrk_generate_messages_cpp: send_results_vdrk/CMakeFiles/send_results_vdrk_generate_messages_cpp.dir/build.make
 
 .PHONY : send_results_vdrk_generate_messages_cpp

@@ -1,4 +1,0 @@
-geometry_msgs/PoseStamped estimateZeroPointPose
-geometry_msgs/PoseStamped trueZeroPointPose
-geometry_msgs/PoseStamped estimateOdomPose
-geometry_msgs/PoseStamped trueOdomPose

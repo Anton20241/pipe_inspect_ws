@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "../devel/share/gennodejs/ros/send_results_vdrk/msg/Poses4.js"
+  "../devel/share/gennodejs/ros/send_results_vdrk/msg/VdrkPose.js"
   "CMakeFiles/send_results_vdrk_generate_messages_nodejs"
 )
 
