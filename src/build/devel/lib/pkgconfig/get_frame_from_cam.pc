@@ -1,0 +1,8 @@
+prefix=/home/anton20241/pipe_inspect_ws/src/build/devel
+
+Name: get_frame_from_cam
+Description: Description of get_frame_from_cam
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

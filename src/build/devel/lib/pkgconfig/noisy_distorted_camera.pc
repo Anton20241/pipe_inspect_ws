@@ -1,8 +1,0 @@
-prefix=/home/anton20241/pipe_inspect_ws/src/build/devel
-
-Name: noisy_distorted_camera
-Description: Description of noisy_distorted_camera
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

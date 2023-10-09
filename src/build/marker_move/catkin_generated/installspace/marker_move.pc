@@ -1,8 +1,0 @@
-prefix=/usr/local
-
-Name: marker_move
-Description: Description of marker_move
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

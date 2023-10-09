@@ -1,8 +1,0 @@
-prefix=/home/anton20241/pipe_inspect_ws/src/build/devel
-
-Name: send_estimate_data
-Description: Description of send_estimate_data
-Version: 0.0.0
-Cflags: -I/home/anton20241/pipe_inspect_ws/src/build/devel/include
-Libs: -L${prefix}/lib 
-Requires: 

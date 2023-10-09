@@ -113,17 +113,6 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -134,6 +123,17 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -243,79 +243,34 @@ visualization_msgs_generate_messages_nodejs/fast:
 .PHONY : visualization_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/rule
+aruco_ros/aruco_ros/CMakeFiles/double.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/double.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/double.dir/rule
 
 # Convenience name for target.
-aruco_ros_gencfg: aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/rule
+double: aruco_ros/aruco_ros/CMakeFiles/double.dir/rule
 
-.PHONY : aruco_ros_gencfg
+.PHONY : double
 
 # fast build rule for target.
-aruco_ros_gencfg/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/build.make aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/build
-.PHONY : aruco_ros_gencfg/fast
+double/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/double.dir/build.make aruco_ros/aruco_ros/CMakeFiles/double.dir/build
+.PHONY : double/fast
 
 # Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-visualization_msgs_generate_messages_lisp: aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+tf2_msgs_generate_messages_eus: aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
 
-.PHONY : visualization_msgs_generate_messages_lisp
+.PHONY : tf2_msgs_generate_messages_eus
 
 # fast build rule for target.
-visualization_msgs_generate_messages_lisp/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
-.PHONY : visualization_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-visualization_msgs_generate_messages_eus: aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
-
-.PHONY : visualization_msgs_generate_messages_eus
-
-# fast build rule for target.
-visualization_msgs_generate_messages_eus/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
-.PHONY : visualization_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_py: aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_py
-
-# fast build rule for target.
-tf2_msgs_generate_messages_py/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
-.PHONY : tf2_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_nodejs: aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-tf2_msgs_generate_messages_nodejs/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
-.PHONY : tf2_msgs_generate_messages_nodejs/fast
+tf2_msgs_generate_messages_eus/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
+.PHONY : tf2_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_py.dir/rule:
@@ -331,6 +286,21 @@ tf_generate_messages_py: aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_py.
 tf_generate_messages_py/fast:
 	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_py.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_py.dir/build
 .PHONY : tf_generate_messages_py/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+tf_generate_messages_nodejs: aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/rule
+
+.PHONY : tf_generate_messages_nodejs
+
+# fast build rule for target.
+tf_generate_messages_nodejs/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/build
+.PHONY : tf_generate_messages_nodejs/fast
 
 # Convenience name for target.
 aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_cpp.dir/rule:
@@ -376,6 +346,81 @@ actionlib_msgs_generate_messages_nodejs: aruco_ros/aruco_ros/CMakeFiles/actionli
 actionlib_msgs_generate_messages_nodejs/fast:
 	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+tf_generate_messages_lisp: aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/rule
+
+.PHONY : tf_generate_messages_lisp
+
+# fast build rule for target.
+tf_generate_messages_lisp/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/build
+.PHONY : tf_generate_messages_lisp/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+dynamic_reconfigure_generate_messages_cpp: aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
+
+.PHONY : dynamic_reconfigure_generate_messages_cpp
+
+# fast build rule for target.
+dynamic_reconfigure_generate_messages_cpp/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build
+.PHONY : dynamic_reconfigure_generate_messages_cpp/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_eus: aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_eus
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_eus/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
+.PHONY : actionlib_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+tf2_msgs_generate_messages_lisp: aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : tf2_msgs_generate_messages_lisp
+
+# fast build rule for target.
+tf2_msgs_generate_messages_lisp/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
+.PHONY : tf2_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+dynamic_reconfigure_generate_messages_nodejs: aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
+
+.PHONY : dynamic_reconfigure_generate_messages_nodejs
+
+# fast build rule for target.
+dynamic_reconfigure_generate_messages_nodejs/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build.make aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build
+.PHONY : dynamic_reconfigure_generate_messages_nodejs/fast
 
 # Convenience name for target.
 aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_eus.dir/rule:
@@ -453,6 +498,36 @@ dynamic_reconfigure_generate_messages_py/fast:
 .PHONY : dynamic_reconfigure_generate_messages_py/fast
 
 # Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_eus: aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/rule
+
+.PHONY : visualization_msgs_generate_messages_eus
+
+# fast build rule for target.
+visualization_msgs_generate_messages_eus/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
+.PHONY : visualization_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+tf2_msgs_generate_messages_py: aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
+
+.PHONY : tf2_msgs_generate_messages_py
+
+# fast build rule for target.
+tf2_msgs_generate_messages_py/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
+.PHONY : tf2_msgs_generate_messages_py/fast
+
+# Convenience name for target.
 aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule:
 	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule
 .PHONY : aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule
@@ -483,126 +558,6 @@ dynamic_reconfigure_generate_messages_eus/fast:
 .PHONY : dynamic_reconfigure_generate_messages_eus/fast
 
 # Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_nodejs: aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-sensor_msgs_generate_messages_nodejs/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
-.PHONY : sensor_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_lisp: aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_lisp
-
-# fast build rule for target.
-sensor_msgs_generate_messages_lisp/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
-.PHONY : sensor_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_py: aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_py
-
-# fast build rule for target.
-sensor_msgs_generate_messages_py/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
-.PHONY : sensor_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_generate_messages_cpp: aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
-
-.PHONY : dynamic_reconfigure_generate_messages_cpp
-
-# fast build rule for target.
-dynamic_reconfigure_generate_messages_cpp/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_cpp/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_lisp: aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-.PHONY : tf_generate_messages_lisp
-
-# fast build rule for target.
-tf_generate_messages_lisp/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_lisp.dir/build
-.PHONY : tf_generate_messages_lisp/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_eus: aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_eus
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_eus/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
-.PHONY : actionlib_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_lisp: aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_lisp
-
-# fast build rule for target.
-tf2_msgs_generate_messages_lisp/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
-.PHONY : tf2_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_eus: aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_eus
-
-# fast build rule for target.
-sensor_msgs_generate_messages_eus/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
-.PHONY : sensor_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
 aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
 	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
 .PHONY : aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
@@ -616,81 +571,6 @@ actionlib_generate_messages_lisp: aruco_ros/aruco_ros/CMakeFiles/actionlib_gener
 actionlib_generate_messages_lisp/fast:
 	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_lisp.dir/build
 .PHONY : actionlib_generate_messages_lisp/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_generate_messages_nodejs: aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
-
-.PHONY : dynamic_reconfigure_generate_messages_nodejs
-
-# fast build rule for target.
-dynamic_reconfigure_generate_messages_nodejs/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build.make aruco_ros/aruco_ros/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_nodejs/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_cpp: aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_cpp
-
-# fast build rule for target.
-sensor_msgs_generate_messages_cpp/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
-.PHONY : sensor_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_nodejs: aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-
-.PHONY : tf_generate_messages_nodejs
-
-# fast build rule for target.
-tf_generate_messages_nodejs/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf_generate_messages_nodejs.dir/build
-.PHONY : tf_generate_messages_nodejs/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/double.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/double.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/double.dir/rule
-
-# Convenience name for target.
-double: aruco_ros/aruco_ros/CMakeFiles/double.dir/rule
-
-.PHONY : double
-
-# fast build rule for target.
-double/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/double.dir/build.make aruco_ros/aruco_ros/CMakeFiles/double.dir/build
-.PHONY : double/fast
-
-# Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_eus: aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_eus
-
-# fast build rule for target.
-tf2_msgs_generate_messages_eus/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
-.PHONY : tf2_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
@@ -708,19 +588,49 @@ actionlib_generate_messages_nodejs/fast:
 .PHONY : actionlib_generate_messages_nodejs/fast
 
 # Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
+aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-visualization_msgs_generate_messages_cpp: aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
+actionlib_generate_messages_cpp: aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
 
-.PHONY : visualization_msgs_generate_messages_cpp
+.PHONY : actionlib_generate_messages_cpp
 
 # fast build rule for target.
-visualization_msgs_generate_messages_cpp/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
-.PHONY : visualization_msgs_generate_messages_cpp/fast
+actionlib_generate_messages_cpp/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/build
+.PHONY : actionlib_generate_messages_cpp/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_py: aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+
+.PHONY : actionlib_msgs_generate_messages_py
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_py/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
+.PHONY : actionlib_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+tf2_msgs_generate_messages_nodejs: aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : tf2_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+tf2_msgs_generate_messages_nodejs/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make aruco_ros/aruco_ros/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
+.PHONY : tf2_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
@@ -753,34 +663,49 @@ actionlib_msgs_generate_messages_cpp/fast:
 .PHONY : actionlib_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-actionlib_generate_messages_cpp: aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+visualization_msgs_generate_messages_cpp: aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/rule
 
-.PHONY : actionlib_generate_messages_cpp
+.PHONY : visualization_msgs_generate_messages_cpp
 
 # fast build rule for target.
-actionlib_generate_messages_cpp/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/actionlib_generate_messages_cpp.dir/build
-.PHONY : actionlib_generate_messages_cpp/fast
+visualization_msgs_generate_messages_cpp/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
+.PHONY : visualization_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
-aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-.PHONY : aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/rule
 
 # Convenience name for target.
-actionlib_msgs_generate_messages_py: aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+aruco_ros_gencfg: aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/rule
 
-.PHONY : actionlib_msgs_generate_messages_py
+.PHONY : aruco_ros_gencfg
 
 # fast build rule for target.
-actionlib_msgs_generate_messages_py/fast:
-	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make aruco_ros/aruco_ros/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
-.PHONY : actionlib_msgs_generate_messages_py/fast
+aruco_ros_gencfg/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/build.make aruco_ros/aruco_ros/CMakeFiles/aruco_ros_gencfg.dir/build
+.PHONY : aruco_ros_gencfg/fast
+
+# Convenience name for target.
+aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+.PHONY : aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+visualization_msgs_generate_messages_lisp: aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/rule
+
+.PHONY : visualization_msgs_generate_messages_lisp
+
+# fast build rule for target.
+visualization_msgs_generate_messages_lisp/fast:
+	cd /home/anton20241/pipe_inspect_ws/src/build && $(MAKE) -f aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make aruco_ros/aruco_ros/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
+.PHONY : visualization_msgs_generate_messages_lisp/fast
 
 src/aruco_ros_utils.o: src/aruco_ros_utils.cpp.o
 
@@ -915,44 +840,39 @@ help:
 	@echo "... visualization_msgs_generate_messages_py"
 	@echo "... list_install_components"
 	@echo "... visualization_msgs_generate_messages_nodejs"
-	@echo "... aruco_ros_gencfg"
-	@echo "... visualization_msgs_generate_messages_lisp"
-	@echo "... visualization_msgs_generate_messages_eus"
-	@echo "... tf2_msgs_generate_messages_py"
-	@echo "... tf2_msgs_generate_messages_nodejs"
+	@echo "... rebuild_cache"
+	@echo "... double"
+	@echo "... tf2_msgs_generate_messages_eus"
 	@echo "... tf_generate_messages_py"
+	@echo "... tf_generate_messages_nodejs"
 	@echo "... tf_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_py"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
+	@echo "... edit_cache"
+	@echo "... tf_generate_messages_lisp"
+	@echo "... dynamic_reconfigure_generate_messages_cpp"
+	@echo "... actionlib_msgs_generate_messages_eus"
+	@echo "... tf2_msgs_generate_messages_lisp"
+	@echo "... dynamic_reconfigure_generate_messages_nodejs"
 	@echo "... tf_generate_messages_eus"
 	@echo "... tf2_msgs_generate_messages_cpp"
 	@echo "... dynamic_reconfigure_generate_messages_lisp"
 	@echo "... actionlib_msgs_generate_messages_lisp"
 	@echo "... dynamic_reconfigure_generate_messages_py"
+	@echo "... visualization_msgs_generate_messages_eus"
+	@echo "... tf2_msgs_generate_messages_py"
 	@echo "... dynamic_reconfigure_gencfg"
 	@echo "... dynamic_reconfigure_generate_messages_eus"
-	@echo "... sensor_msgs_generate_messages_nodejs"
-	@echo "... sensor_msgs_generate_messages_lisp"
-	@echo "... sensor_msgs_generate_messages_py"
-	@echo "... edit_cache"
-	@echo "... dynamic_reconfigure_generate_messages_cpp"
-	@echo "... tf_generate_messages_lisp"
-	@echo "... actionlib_msgs_generate_messages_eus"
-	@echo "... tf2_msgs_generate_messages_lisp"
-	@echo "... sensor_msgs_generate_messages_eus"
 	@echo "... actionlib_generate_messages_lisp"
-	@echo "... dynamic_reconfigure_generate_messages_nodejs"
-	@echo "... sensor_msgs_generate_messages_cpp"
-	@echo "... tf_generate_messages_nodejs"
-	@echo "... rebuild_cache"
-	@echo "... double"
-	@echo "... tf2_msgs_generate_messages_eus"
 	@echo "... actionlib_generate_messages_nodejs"
-	@echo "... visualization_msgs_generate_messages_cpp"
-	@echo "... actionlib_generate_messages_eus"
-	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... actionlib_generate_messages_cpp"
 	@echo "... actionlib_msgs_generate_messages_py"
+	@echo "... tf2_msgs_generate_messages_nodejs"
+	@echo "... actionlib_generate_messages_eus"
+	@echo "... actionlib_msgs_generate_messages_cpp"
+	@echo "... visualization_msgs_generate_messages_cpp"
+	@echo "... aruco_ros_gencfg"
+	@echo "... visualization_msgs_generate_messages_lisp"
 	@echo "... src/aruco_ros_utils.o"
 	@echo "... src/aruco_ros_utils.i"
 	@echo "... src/aruco_ros_utils.s"

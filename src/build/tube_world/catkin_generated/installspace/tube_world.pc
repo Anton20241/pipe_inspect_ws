@@ -1,0 +1,8 @@
+prefix=/usr/local
+
+Name: tube_world
+Description: Description of tube_world
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
